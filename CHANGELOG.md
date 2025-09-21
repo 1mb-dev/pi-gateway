@@ -5,6 +5,29 @@ All notable changes to Pi Gateway will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-09-21
+
+### Added
+- **QEMU Pi Emulation Testing Environment** for comprehensive integration testing
+- **Enhanced Test Infrastructure** with realistic Pi hardware simulation
+- **Improved Code Quality Tools** with optimized shellcheck configuration
+
+### Enhanced
+- **Testing Robustness** with better error handling and validation
+- **CI/CD Pipeline** with BATS executable permissions and improved reliability
+- **Code Organization** with cleaner gitignore patterns and reduced redundancy
+
+### Fixed
+- **Version Consistency** across all test files and documentation
+- **Development Environment** setup and configuration issues
+- **Test Execution** reliability in various environments
+
+### Technical Improvements
+- Added QEMU kernel and device tree binaries for Pi emulation
+- Enhanced mock system capabilities for comprehensive testing
+- Streamlined lint configuration for better code quality enforcement
+- Improved test scripts with better permission handling
+
 ## [1.1.0] - 2025-09-16
 
 ### Added

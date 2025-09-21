@@ -4,7 +4,7 @@
 [![Release](https://img.shields.io/github/v/release/vnykmshr/pi-gateway)](https://github.com/vnykmshr/pi-gateway/releases)
 [![License](https://img.shields.io/github/license/vnykmshr/pi-gateway)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-40%20tests%20|%20100%25%20pass-green)](https://github.com/vnykmshr/pi-gateway/actions)
-[![Version](https://img.shields.io/badge/version-1.1.0-blue)](https://github.com/vnykmshr/pi-gateway/releases)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue)](https://github.com/vnykmshr/pi-gateway/releases)
 [![Production Ready](https://img.shields.io/badge/production-ready-brightgreen)](docs/deployment-guide.md)
 
 **Complete Raspberry Pi homelab bootstrap system with automated security hardening, VPN setup, and comprehensive testing infrastructure.**
@@ -54,6 +54,7 @@ curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/qui
 
 ### 🧪 **Development & Testing**
 - **Production Validated**: ✅ Comprehensive E2E testing completed
+- **QEMU Pi Emulation**: Full hardware emulation testing environment
 - **Virtual Sandbox**: Complete dry-run environment with hardware mocking
 - **Docker-based Pi Simulation**: Realistic Raspberry Pi OS environment testing
 - **40 Unit Tests**: 100% pass rate with comprehensive validation
@@ -117,7 +118,7 @@ pi-gateway/
 ## 🧪 Development & Testing
 
 ### ✅ Production Validation Status
-**Pi Gateway v1.1.0 has passed comprehensive end-to-end testing and is APPROVED FOR PRODUCTION DEPLOYMENT.**
+**Pi Gateway v1.2.0 has passed comprehensive end-to-end testing and is APPROVED FOR PRODUCTION DEPLOYMENT.**
 
 - ✅ **40/40 Unit Tests Passing** (100% pass rate)
 - ✅ **Complete E2E Testing** (All major components validated)
