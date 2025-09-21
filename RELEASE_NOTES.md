@@ -1,5 +1,73 @@
 # Pi Gateway Release Notes
 
+## Version 1.2.0 - Enhanced Testing & Quality 🧪
+
+**Release Date:** 2025-09-21
+**Status:** Production Ready
+**Compatibility:** Raspberry Pi 4/5, ARM64/x86_64
+
+### 🎯 Overview
+
+Pi Gateway v1.2.0 introduces comprehensive QEMU Pi emulation testing, enhanced code quality tools, and improved development workflow. This release strengthens the testing infrastructure while maintaining production stability.
+
+### ✨ New Features
+
+#### 🧪 **QEMU Pi Emulation Testing**
+- **Full Hardware Emulation**: Complete Raspberry Pi environment simulation
+- **Kernel & Device Tree**: Pre-configured QEMU binaries for Pi testing
+- **SSH Integration**: Remote testing capabilities with automated scripts
+- **Quick Test Mode**: Fast validation for development workflows
+
+#### 🔧 **Enhanced Development Tools**
+- **Optimized Shellcheck**: Streamlined lint configuration for better code quality
+- **Improved CI/CD**: Enhanced BATS test permissions and reliability
+- **Code Organization**: Cleaner gitignore patterns and reduced redundancy
+
+### 🚀 **What's New**
+
+#### Testing Infrastructure
+- Added `tests/qemu/` directory with complete Pi emulation setup
+- New QEMU testing scripts: `run-pi-vm.sh`, `quick-test-vm.sh`, `run-pi-vm-ssh.sh`
+- Enhanced mock system capabilities for comprehensive testing
+- Improved test execution reliability across environments
+
+#### Code Quality Improvements
+- New `.shellcheckrc` configuration for optimized linting
+- Enhanced common.sh utilities for better script modularity
+- Improved error handling and validation in core scripts
+- Streamlined CI pipeline with better permission management
+
+### 📋 **Installation & Usage**
+
+Same installation methods as v1.1.0 with enhanced testing capabilities:
+
+```bash
+# QEMU testing (new)
+make setup-qemu
+make test-integration
+
+# Enhanced development testing
+make test-dry-run
+make test-unit
+make lint
+```
+
+### 🛠️ **Technical Improvements**
+
+- **Version Consistency**: Updated all version references across codebase
+- **Test Reliability**: Fixed BATS executable permissions in CI
+- **Code Organization**: Removed redundant patterns from gitignore
+- **Development Workflow**: Enhanced mock hardware simulation
+
+### 🔄 **Upgrade Path**
+
+From v1.1.0:
+```bash
+cd pi-gateway
+git pull
+# Version automatically updated to 1.2.0
+```
+
 ## Version 1.0.0 - Production Release 🚀
 
 **Release Date:** 2025-09-16
