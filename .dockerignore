@@ -1,0 +1,40 @@
+# Git and version control
+.git
+.gitignore
+.gitmodules
+
+# Build artifacts
+*.log
+*.tmp
+*.temp
+*.bak
+backups/
+
+# Test artifacts
+tests/results/
+tests/qemu/
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Documentation (except essential docs)
+docs/
+*.md
+!README.md
+
+# Large files that aren't needed in container
+assets/images/
+*.iso
+*.img
+*.qcow2
+
+# CI/CD
+.github/
+
+# Local environment
+.env
+.env.local

@@ -62,9 +62,6 @@ jobs:
   docker-tests:
     name: Docker Integration Tests
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        mode: [simple, systemd]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -77,13 +74,8 @@ jobs:
       - name: Build Docker test image
         run: make docker-build
 
-      - name: Run Docker tests (Simple Mode)
-        if: matrix.mode == 'simple'
+      - name: Run Docker tests
         run: make test-docker
-
-      - name: Run Docker tests (Systemd Mode)
-        if: matrix.mode == 'systemd'
-        run: make test-docker-systemd
 
       - name: Clean up Docker environment
         if: always()

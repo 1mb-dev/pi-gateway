@@ -53,6 +53,8 @@ teardown() {
 }
 
 @test "check-requirements.sh validates storage requirements" {
+    export DRY_RUN=true
+    export MOCK_HARDWARE=true
     export MOCK_PI_STORAGE_GB=4
 
     run "$PI_GATEWAY_ROOT/scripts/check-requirements.sh"
