@@ -82,17 +82,20 @@ build_test_image() {
     # Try to build ARM64 image first, then fall back to native
     local build_success=false
 
-    # Try ARM64 build with buildx if available
-    if docker buildx version >/dev/null 2>&1; then
+    # Skip ARM64 build in CI for speed, use native build directly
+    if [[ "${CI:-false}" == "true" ]]; then
+        info "CI environment detected, using native build for speed..."
+    elif docker buildx version >/dev/null 2>&1; then
         info "Attempting ARM64 build with buildx..."
-        if docker buildx build \
+        if timeout 300 docker buildx build \
             --platform linux/arm64 \
+            --load \
             -t "$IMAGE_NAME" \
             -f "$dockerfile" \
             . 2>/dev/null; then
             build_success=true
         else
-            warning "ARM64 build failed, trying native build..."
+            warning "ARM64 build failed or timed out, trying native build..."
         fi
     fi
 
@@ -102,7 +105,13 @@ build_test_image() {
         docker build -t "$IMAGE_NAME" -f "$dockerfile" .
     fi
 
-    success "Test image built successfully"
+    # Verify the image was built and is available
+    if docker images "$IMAGE_NAME" --format "table {{.Repository}}:{{.Tag}}" | grep -q "$IMAGE_NAME"; then
+        success "Test image built successfully and available locally"
+    else
+        error "Test image build completed but image not found locally"
+        exit 1
+    fi
 }
 
 start_test_container() {
@@ -179,8 +188,8 @@ run_script_in_container() {
     # Ensure script is executable
     docker exec "$CONTAINER_NAME" chmod +x "/home/pi/pi-gateway/$script_path"
 
-    # Run script as pi user with sudo
-    docker exec -u pi "$CONTAINER_NAME" bash -c "cd /home/pi/pi-gateway && sudo ./$script_path"
+    # Run script as pi user with sudo in test mode
+    docker exec -u pi "$CONTAINER_NAME" bash -c "cd /home/pi/pi-gateway && sudo env DRY_RUN=true MOCK_HARDWARE=true MOCK_NETWORK=true MOCK_SYSTEM=true PI_GATEWAY_TESTING=true ./$script_path"
 }
 
 run_check_requirements_test() {

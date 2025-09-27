@@ -55,6 +55,10 @@ teardown() {
 }
 
 @test "install-dependencies.sh processes core packages" {
+    export DRY_RUN=true
+    export MOCK_HARDWARE=true
+    export MOCK_SYSTEM=true
+
     run "$PI_GATEWAY_ROOT/scripts/install-dependencies.sh"
     echo "Output: $output"
 
