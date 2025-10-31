@@ -1,60 +1,101 @@
-# Pi Gateway QEMU Testing Environment
+# QEMU Pi Emulation Testing
 
-This directory contains QEMU-based Raspberry Pi emulation for testing Pi Gateway in a realistic Pi OS environment.
+Full Raspberry Pi hardware emulation for integration testing.
 
-## Setup
+## Overview
 
-1. Install QEMU with ARM64 support:
-   ```bash
-   brew install qemu  # macOS
-   ```
+QEMU test images are **not stored in git**. The `setup-pi-vm.sh` script downloads them on-demand (~2.3GB total).
 
-2. Set up the QEMU Pi environment:
-   ```bash
-   make setup-qemu
-   ```
+**Git repository size:** ~17MB
+**Working directory with QEMU:** ~2.3GB (downloaded locally only)
+
+## Quick Start
+
+```bash
+# Download and setup QEMU environment (one-time, ~2.3GB download)
+make setup-qemu
+
+# Run integration tests
+make test-integration
+```
+
+## Prerequisites
+
+Install QEMU with ARM64 support:
+
+```bash
+# macOS
+brew install qemu
+
+# Ubuntu/Debian
+sudo apt install qemu-system-arm
+
+# Arch Linux
+sudo pacman -S qemu-system-aarch64
+```
+
+## What Gets Downloaded
+
+The setup script downloads these files on-demand:
+
+| File | Size | Source |
+|------|------|--------|
+| Raspberry Pi OS Image | ~1.9GB | raspberrypi.org |
+| Compressed Image | ~432MB | (deleted after extraction) |
+| QEMU Kernel | ~5.2MB | qemu-rpi-kernel repo |
+| Device Tree Binary | ~12KB | qemu-rpi-kernel repo |
+
+**Total:** ~2.3GB after setup (compressed image is removed)
+
+## Files Not in Git
+
+These large files are gitignored and downloaded locally only:
+
+```
+tests/qemu/pi-gateway-test/
+├── raspios-bookworm-arm64-lite.img   (1.9GB) - gitignored
+├── 2024-07-04-raspios-*.img.xz       (432MB) - gitignored
+├── kernel-qemu                        (5.2MB) - gitignored
+└── versatile-pb.dtb                   (12KB)  - gitignored
+```
 
 ## Usage
 
-### VM Management Scripts
+```bash
+# Setup environment (downloads images on first run)
+./tests/qemu/setup-pi-vm.sh
 
-Located in `pi-gateway-test/` after setup:
+# Start VM
+./tests/qemu/pi-gateway-test/run-pi-vm.sh
 
-- `run-pi-vm.sh` - Full Pi VM with networking
-- `run-pi-vm-ssh.sh` - Pi VM with SSH access on localhost:5022  
-- `quick-test-vm.sh` - Simplified Pi boot test
+# SSH into VM
+ssh pi@localhost -p 5022
+# Default password: raspberry
 
-### Testing Pi Gateway
+# Restore clean VM snapshot
+./tests/qemu/pi-gateway-test/restore-pi-vm.sh
 
-1. Start the Pi VM:
-   ```bash
-   cd tests/qemu/pi-gateway-test
-   ./run-pi-vm-ssh.sh
-   ```
+# Destroy VM
+./tests/qemu/pi-gateway-test/destroy-pi-vm.sh
+```
 
-2. Wait for boot (2-3 minutes), then SSH:
-   ```bash
-   ssh pi@localhost -p 5022
-   # Default password: raspberry
-   ```
+## Cleaning Up
 
-3. Run Pi Gateway setup:
-   ```bash
-   sudo ./setup.sh --non-interactive
-   ```
+To remove QEMU files and reclaim disk space:
 
-## Performance Notes
+```bash
+# Remove all downloaded images
+rm -rf tests/qemu/pi-gateway-test/*.img*
+rm -rf tests/qemu/pi-gateway-test/kernel-qemu
 
-- **Boot time**: 2-5 minutes (realistic Pi timing)
-- **Resource usage**: ~1GB RAM, ~4GB disk
-- **SSH access**: Available on localhost:5022 after boot
+# Or destroy entire VM
+./tests/qemu/pi-gateway-test/destroy-pi-vm.sh
+```
 
-## Comparison with Docker Testing
+Re-run `make setup-qemu` to download again when needed.
 
-| Method | Speed | Realism | Use Case |
-|--------|-------|---------|----------|
-| Docker | Fast (30s) | Good | Development |
-| QEMU | Slower (3-5min) | Excellent | Pre-production |
-| Real Pi | Native | Perfect | Production |
+## CI/CD
 
-For daily development, use Docker testing. For final validation, use QEMU.
+Integration tests run only on `main` branch pushes to avoid unnecessary downloads in CI.
+
+See `.github/workflows/ci.yml` for configuration.

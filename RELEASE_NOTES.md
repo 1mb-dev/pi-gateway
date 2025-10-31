@@ -260,10 +260,9 @@ make setup
 - [Troubleshooting Guide](docs/troubleshooting.md) - Problem solving
 
 #### Technical Documentation
-- [Architecture Overview](docs/architecture.md) - System design
+- [Technical Architecture Review](docs/technical-architecture-review.md) - System design
 - [Extension Development](docs/extensions.md) - Plugin creation
-- [API Reference](docs/api.md) - Integration interfaces
-- [Security Guide](docs/security.md) - Best practices
+- [Security Best Practices](docs/security.md) - Security hardening and compliance
 
 ### 🔄 **Migration & Compatibility**
 

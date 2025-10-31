@@ -1,0 +1,36 @@
+# Pi Gateway Code Owners
+# These owners will be automatically requested for review when PRs modify these files
+
+# Default owner for everything
+* @vnykmshr
+
+# Core setup and orchestration
+/setup.sh @vnykmshr
+/scripts/check-requirements.sh @vnykmshr
+/scripts/install-dependencies.sh @vnykmshr
+
+# Security-critical components
+/scripts/system-hardening.sh @vnykmshr
+/scripts/security-hardening.sh @vnykmshr
+/scripts/ssh-setup.sh @vnykmshr
+/scripts/firewall-setup.sh @vnykmshr
+
+# VPN and network components
+/scripts/vpn-setup.sh @vnykmshr
+/scripts/vpn-client-manager.sh @vnykmshr
+/scripts/network-optimizer.sh @vnykmshr
+
+# CI/CD and testing infrastructure
+/.github/ @vnykmshr
+/tests/ @vnykmshr
+/Makefile @vnykmshr
+
+# Documentation
+/docs/ @vnykmshr
+/README.md @vnykmshr
+/CHANGELOG.md @vnykmshr
+/CONTRIBUTING.md @vnykmshr
+/SECURITY.md @vnykmshr
+
+# Configuration templates
+/config/ @vnykmshr

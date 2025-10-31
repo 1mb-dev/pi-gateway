@@ -100,7 +100,7 @@ curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/qui
 
 ### Advanced Topics
 - [Extension Development](docs/extensions.md) - Creating custom extensions
-- [Security Best Practices](docs/security.md) - Hardening and compliance
+- [Security Best Practices](docs/security.md) - Security hardening and compliance
 - [Release Notes](RELEASE_NOTES.md) - Version history and features
 
 ## Project Structure
