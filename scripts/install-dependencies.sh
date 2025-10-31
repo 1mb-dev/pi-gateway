@@ -426,27 +426,27 @@ verify_installation() {
 
 print_summary() {
     echo
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}            Installation Summary              ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "            Installation Summary              "
+    echo "================================================"
     echo
 
-    echo -e "Packages installed: ${GREEN}$PACKAGES_INSTALLED${NC}"
-    echo -e "Package failures: ${RED}$PACKAGES_FAILED${NC}"
-    echo -e "Services configured: ${BLUE}$SERVICES_CONFIGURED${NC}"
+    echo "Packages installed: $PACKAGES_INSTALLED"
+    echo "Package failures: $PACKAGES_FAILED"
+    echo "Services configured: $SERVICES_CONFIGURED"
     echo
-    echo -e "Log file: ${BLUE}$LOG_FILE${NC}"
-    echo -e "Backup directory: ${BLUE}$BACKUP_DIR${NC}"
+    echo "Log file: $LOG_FILE"
+    echo "Backup directory: $BACKUP_DIR"
     echo
 
     if [[ $PACKAGES_FAILED -eq 0 ]]; then
-        echo -e "${GREEN}✓ All dependencies installed successfully${NC}"
+        echo "All dependencies installed successfully"
         echo -e "Next step: Run the system hardening script"
-        echo -e "Command: ${BLUE}sudo ./scripts/system-hardening.sh${NC}"
+        echo "Command: sudo ./scripts/system-hardening.sh"
         return 0
     else
-        echo -e "${YELLOW}⚠ Some packages failed to install ($PACKAGES_FAILED failures)${NC}"
-        echo -e "Check the log file for details: ${BLUE}$LOG_FILE${NC}"
+        echo "Some packages failed to install ($PACKAGES_FAILED failures)"
+        echo "Check the log file for details: $LOG_FILE"
         echo -e "You may need to resolve these issues before proceeding"
         return 1
     fi
@@ -484,52 +484,52 @@ main() {
             echo "Internet connectivity mocked for testing"
         fi
 
-        echo -e "${BLUE}--- System Updates ---${NC}"
+        echo "--- System Updates ---"
         echo "Running apt update..."
         echo "Running apt install for required packages..."
 
-        echo -e "${BLUE}--- Core System Packages ---${NC}"
+        echo "--- Core System Packages ---"
         echo "Installing curl..."
-        echo -e "  ${GREEN}✓${NC} curl installed successfully"
+        echo "   curl installed successfully"
         echo "Installing wget..."
-        echo -e "  ${GREEN}✓${NC} wget installed successfully"
+        echo "   wget installed successfully"
         echo "Installing git..."
-        echo -e "  ${GREEN}✓${NC} git installed successfully"
+        echo "   git installed successfully"
         echo "Installing unzip..."
-        echo -e "  ${GREEN}✓${NC} unzip installed successfully"
+        echo "   unzip installed successfully"
 
-        echo -e "${BLUE}--- Security Packages ---${NC}"
+        echo "--- Security Packages ---"
         echo "Installing ufw..."
-        echo -e "  ${GREEN}✓${NC} ufw installed successfully"
+        echo "   ufw installed successfully"
         echo "Installing fail2ban..."
-        echo -e "  ${GREEN}✓${NC} fail2ban installed successfully"
+        echo "   fail2ban installed successfully"
         echo "Installing rkhunter..."
-        echo -e "  ${GREEN}✓${NC} rkhunter installed successfully"
+        echo "   rkhunter installed successfully"
 
-        echo -e "${BLUE}--- Network Packages ---${NC}"
+        echo "--- Network Packages ---"
         echo "Installing wireguard..."
-        echo -e "  ${GREEN}✓${NC} wireguard installed successfully"
+        echo "   wireguard installed successfully"
         echo "WireGuard tools verification skipped in dry-run mode"
 
-        echo -e "${BLUE}--- VNC Server ---${NC}"
+        echo "--- VNC Server ---"
         echo "Installing alternative VNC server..."
-        echo -e "  ${GREEN}✓${NC} TightVNC server installed as alternative"
+        echo "   TightVNC server installed as alternative"
 
-        echo -e "${BLUE}--- Service Configuration ---${NC}"
+        echo "--- Service Configuration ---"
         echo "Creating Pi Gateway service user..."
-        echo -e "  ${GREEN}✓${NC} Service user created"
-        echo -e "  ${GREEN}✓${NC} Service directories created and secured"
+        echo "   Service user created"
+        echo "   Service directories created and secured"
         echo "Running systemctl enable ssh..."
-        echo -e "  ${GREEN}✓${NC} SSH service enabled"
+        echo "   SSH service enabled"
 
-        echo -e "${BLUE}--- Configuration Backup ---${NC}"
-        echo -e "  ${GREEN}✓${NC} sshd_config backed up"
-        echo -e "  ${GREEN}✓${NC} Configuration files secured"
+        echo "--- Configuration Backup ---"
+        echo "   sshd_config backed up"
+        echo "   Configuration files secured"
 
-        echo -e "${BLUE}--- Python Packages ---${NC}"
+        echo "--- Python Packages ---"
         echo "Python packages installation skipped in dry-run mode"
 
-        echo -e "${GREEN}✓${NC} All dependencies installed successfully (TESTING MODE)"
+        echo " All dependencies installed successfully (TESTING MODE)"
         echo "Full installation log saved to: pi-gateway-install-deps.log"
         log "Dependency installation completed in testing mode"
         exit 0
@@ -570,7 +570,7 @@ main() {
 }
 
 # Handle script interruption
-trap 'echo -e "\n${YELLOW}Installation interrupted${NC}"; exit 130' INT
+trap 'echo "\nInstallation interrupted"; exit 130' INT
 
 # Check if being sourced or executed
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

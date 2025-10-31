@@ -211,7 +211,7 @@ validate_mock_network() {
     if mock_ping "8.8.8.8" 1 >/dev/null 2>&1; then
         echo -e "  ✓ Mock connectivity test passed"
     else
-        echo -e "  ${RED}✗ Mock connectivity test failed"
+        echo "  ✗ Mock connectivity test failed"
         validation_passed=false
     fi
 
@@ -219,7 +219,7 @@ validate_mock_network() {
     if mock_nslookup "google.com" >/dev/null 2>&1; then
         echo -e "  ✓ Mock DNS resolution test passed"
     else
-        echo -e "  ${RED}✗ Mock DNS resolution test failed"
+        echo "  ✗ Mock DNS resolution test failed"
         validation_passed=false
     fi
 
@@ -229,7 +229,7 @@ validate_mock_network() {
     if [[ $interface_count -gt 0 ]]; then
         echo -e "  ✓ Mock network interfaces: $interface_count found"
     else
-        echo -e "  ${RED}✗ No mock network interfaces found"
+        echo "  ✗ No mock network interfaces found"
         validation_passed=false
     fi
 

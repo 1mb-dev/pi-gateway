@@ -156,7 +156,7 @@ validate_mock_hardware() {
 
     # Check mock model
     if ! mock_raspberry_pi_detection >/dev/null; then
-        echo -e "  ${RED}✗ Mock Pi model detection failed"
+        echo "  ✗ Mock Pi model detection failed"
         validation_passed=false
     else
         echo -e "  ✓ Mock Pi model: $(mock_raspberry_pi_detection)"
@@ -166,7 +166,7 @@ validate_mock_hardware() {
     local mem_kb
     mem_kb=$(mock_memory_detection)
     if [[ -z "$mem_kb" ]]; then
-        echo -e "  ${RED}✗ Mock memory detection failed"
+        echo "  ✗ Mock memory detection failed"
         validation_passed=false
     else
         echo -e "  ✓ Mock memory: $((mem_kb / 1024))MB"
@@ -176,7 +176,7 @@ validate_mock_hardware() {
     local arch
     arch=$(mock_architecture_detection)
     if [[ -z "$arch" ]]; then
-        echo -e "  ${RED}✗ Mock architecture detection failed"
+        echo "  ✗ Mock architecture detection failed"
         validation_passed=false
     else
         echo -e "  ✓ Mock architecture: $arch"

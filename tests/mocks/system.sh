@@ -376,7 +376,7 @@ validate_mock_system() {
     if mock_systemctl status ssh >/dev/null 2>&1; then
         echo -e "  ✓ Mock systemctl working"
     else
-        echo -e "  ${RED}✗ Mock systemctl failed"
+        echo "  ✗ Mock systemctl failed"
         validation_passed=false
     fi
 
@@ -384,7 +384,7 @@ validate_mock_system() {
     if mock_apt update >/dev/null 2>&1; then
         echo -e "  ✓ Mock apt working"
     else
-        echo -e "  ${RED}✗ Mock apt failed"
+        echo "  ✗ Mock apt failed"
         validation_passed=false
     fi
 
@@ -392,7 +392,7 @@ validate_mock_system() {
     if mock_sysctl net.ipv4.ip_forward >/dev/null 2>&1; then
         echo -e "  ✓ Mock sysctl working"
     else
-        echo -e "  ${RED}✗ Mock sysctl failed"
+        echo "  ✗ Mock sysctl failed"
         validation_passed=false
     fi
 

@@ -690,30 +690,30 @@ EOF
 
 print_summary() {
     echo
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}           Hardening Summary                   ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "           Hardening Summary                   "
+    echo "================================================"
     echo
 
-    echo -e "Hardening measures applied: ${GREEN}$HARDENING_APPLIED${NC}"
-    echo -e "Failed measures: ${RED}$HARDENING_FAILED${NC}"
-    echo -e "Warnings: ${YELLOW}$WARNINGS${NC}"
+    echo "Hardening measures applied: $HARDENING_APPLIED"
+    echo "Failed measures: $HARDENING_FAILED"
+    echo "Warnings: $WARNINGS"
     echo
-    echo -e "Log file: ${BLUE}$LOG_FILE${NC}"
-    echo -e "Backups: ${BLUE}$BACKUP_DIR${NC}"
+    echo "Log file: $LOG_FILE"
+    echo "Backups: $BACKUP_DIR"
     echo
 
     if [[ $HARDENING_FAILED -eq 0 ]]; then
-        echo -e "${GREEN}✓ System hardening completed successfully${NC}"
+        echo "System hardening completed successfully"
         echo -e "Next step: Configure SSH security"
-        echo -e "Command: ${BLUE}sudo ./scripts/ssh-setup.sh${NC}"
+        echo "Command: sudo ./scripts/ssh-setup.sh"
         echo
-        echo -e "${YELLOW}⚠ IMPORTANT: Reboot recommended to ensure all changes take effect${NC}"
-        echo -e "Command: ${BLUE}sudo reboot${NC}"
+        echo "IMPORTANT: Reboot recommended to ensure all changes take effect"
+        echo "Command: sudo reboot"
         return 0
     else
-        echo -e "${YELLOW}⚠ System hardening completed with some issues${NC}"
-        echo -e "Review the log file for details: ${BLUE}$LOG_FILE${NC}"
+        echo "System hardening completed with some issues"
+        echo "Review the log file for details: $LOG_FILE"
         return 1
     fi
 }
@@ -753,7 +753,7 @@ main() {
 }
 
 # Handle interruption
-trap 'echo -e "\n${YELLOW}Hardening interrupted${NC}"; exit 130' INT
+trap 'echo "\nHardening interrupted"; exit 130' INT
 
 # Execute main function
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
