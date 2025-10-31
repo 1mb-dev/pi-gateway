@@ -19,7 +19,7 @@ mock_systemctl() {
     local service="$2"
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} systemctl $operation $service"
+        echo -e "  [MOCK] systemctl $operation $service"
 
         case "$operation" in
             "enable"|"disable"|"start"|"stop"|"restart"|"reload")
@@ -73,7 +73,7 @@ mock_apt() {
     local packages=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} apt $operation ${packages[*]:-}"
+        echo -e "  [MOCK] apt $operation ${packages[*]:-}"
 
         case "$operation" in
             "update")
@@ -140,7 +140,7 @@ mock_sysctl() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} sysctl ${args[*]}"
+        echo -e "  [MOCK] sysctl ${args[*]}"
 
         if [[ "${args[0]}" == "-p" ]]; then
             echo "Mock: Loading sysctl settings from ${args[1]:-/etc/sysctl.conf}"
@@ -177,7 +177,7 @@ mock_ufw() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} ufw ${args[*]}"
+        echo -e "  [MOCK] ufw ${args[*]}"
 
         case "${args[0]}" in
             "enable")
@@ -226,7 +226,7 @@ mock_useradd() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} useradd ${args[*]}"
+        echo -e "  [MOCK] useradd ${args[*]}"
         echo "Mock: User account created successfully"
         return 0
     fi
@@ -239,7 +239,7 @@ mock_usermod() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} usermod ${args[*]}"
+        echo -e "  [MOCK] usermod ${args[*]}"
         echo "Mock: User account modified successfully"
         return 0
     fi
@@ -252,7 +252,7 @@ mock_passwd() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} passwd ${args[*]}"
+        echo -e "  [MOCK] passwd ${args[*]}"
 
         if [[ "${args[0]}" == "-l" ]]; then
             echo "Mock: User account locked"
@@ -272,7 +272,7 @@ mock_chmod() {
     local file="$2"
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} chmod $mode $file"
+        echo -e "  [MOCK] chmod $mode $file"
         return 0
     fi
 
@@ -285,7 +285,7 @@ mock_chown() {
     local file="$2"
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} chown $owner $file"
+        echo -e "  [MOCK] chown $owner $file"
         return 0
     fi
 
@@ -301,14 +301,14 @@ mock_sudo() {
         if [[ "${args[0]}" == "-n" && "${args[1]}" == "true" ]]; then
             # Test passwordless sudo
             if [[ "$MOCK_SUDO_ACCESS" == "true" ]]; then
-                echo -e "  ${MOCK_COLOR}[MOCK]${NC} Passwordless sudo access verified"
+                echo -e "  [MOCK] Passwordless sudo access verified"
                 return 0
             else
-                echo -e "  ${MOCK_COLOR}[MOCK]${NC} sudo: a password is required"
+                echo -e "  [MOCK] sudo: a password is required"
                 return 1
             fi
         else
-            echo -e "  ${MOCK_COLOR}[MOCK]${NC} sudo ${args[*]}"
+            echo -e "  [MOCK] sudo ${args[*]}"
             # Execute the command without sudo in mock mode
             "${args[@]}"
             return $?
@@ -322,10 +322,10 @@ mock_sudo() {
 # Set up mock system environment
 setup_mock_system() {
     if is_mocked "system" || is_dry_run; then
-        echo -e "${MOCK_COLOR}⚙️  Setting up mock system environment${NC}"
-        echo -e "${MOCK_COLOR}   → User: $MOCK_USER${NC}"
-        echo -e "${MOCK_COLOR}   → Sudo access: $MOCK_SUDO_ACCESS${NC}"
-        echo -e "${MOCK_COLOR}   → Systemd enabled: $MOCK_SYSTEMD_ENABLED${NC}"
+        echo "Setting up mock system environment"
+        echo "   → User: $MOCK_USER"
+        echo "   → Sudo access: $MOCK_SUDO_ACCESS"
+        echo "   → Systemd enabled: $MOCK_SYSTEMD_ENABLED"
         echo
 
         # Create command aliases for mocking
@@ -368,39 +368,39 @@ validate_mock_system() {
         return 0
     fi
 
-    echo -e "${MOCK_COLOR}🔍 Validating mock system setup${NC}"
+    echo "🔍 Validating mock system setup"
 
     local validation_passed=true
 
     # Test systemctl
     if mock_systemctl status ssh >/dev/null 2>&1; then
-        echo -e "  ${GREEN}✓${NC} Mock systemctl working"
+        echo -e "  ✓ Mock systemctl working"
     else
-        echo -e "  ${RED}✗${NC} Mock systemctl failed"
+        echo -e "  ${RED}✗ Mock systemctl failed"
         validation_passed=false
     fi
 
     # Test apt
     if mock_apt update >/dev/null 2>&1; then
-        echo -e "  ${GREEN}✓${NC} Mock apt working"
+        echo -e "  ✓ Mock apt working"
     else
-        echo -e "  ${RED}✗${NC} Mock apt failed"
+        echo -e "  ${RED}✗ Mock apt failed"
         validation_passed=false
     fi
 
     # Test sysctl
     if mock_sysctl net.ipv4.ip_forward >/dev/null 2>&1; then
-        echo -e "  ${GREEN}✓${NC} Mock sysctl working"
+        echo -e "  ✓ Mock sysctl working"
     else
-        echo -e "  ${RED}✗${NC} Mock sysctl failed"
+        echo -e "  ${RED}✗ Mock sysctl failed"
         validation_passed=false
     fi
 
     if [[ "$validation_passed" == "true" ]]; then
-        echo -e "${MOCK_COLOR}✅ Mock system validation passed${NC}"
+        echo "✅ Mock system validation passed"
         return 0
     else
-        echo -e "${MOCK_COLOR}❌ Mock system validation failed${NC}"
+        echo "❌ Mock system validation failed"
         return 1
     fi
 }
@@ -410,7 +410,7 @@ mock_lsb_release() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} lsb_release ${args[*]}"
+        echo -e "  [MOCK] lsb_release ${args[*]}"
 
         case "${args[0]}" in
             "-sc")
@@ -444,7 +444,7 @@ mock_apt_cache() {
     local args=("$@")
 
     if is_mocked "system" || is_dry_run; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} apt-cache ${args[*]}"
+        echo -e "  [MOCK] apt-cache ${args[*]}"
 
         case "${args[0]}" in
             "show")

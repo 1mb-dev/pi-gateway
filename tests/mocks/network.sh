@@ -20,7 +20,7 @@ mock_ping() {
     local count="${2:-1}"
 
     if is_mocked "network"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} ping -c $count $target"
+        echo -e "  [MOCK] ping -c $count $target"
 
         if [[ "$MOCK_INTERNET_CONNECTIVITY" == "true" ]]; then
             # Simulate successful ping
@@ -47,7 +47,7 @@ mock_nslookup() {
     local target="$1"
 
     if is_mocked "network"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} nslookup $target"
+        echo -e "  [MOCK] nslookup $target"
 
         if [[ "$MOCK_DNS_RESOLUTION" == "true" ]]; then
             # Simulate successful DNS resolution
@@ -73,7 +73,7 @@ EOF
 # Mock network interface detection
 mock_network_interfaces() {
     if is_mocked "network"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} Network interfaces simulated"
+        echo -e "  [MOCK] Network interfaces simulated"
 
         # Create mock ip link output
         local interface_count=1
@@ -94,7 +94,7 @@ mock_network_interfaces() {
 # Mock network speed test
 mock_network_speed_test() {
     if is_mocked "network"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} Network speed test: ${MOCK_NETWORK_SPEED}Mbps (simulated)"
+        echo -e "  [MOCK] Network speed test: ${MOCK_NETWORK_SPEED}Mbps (simulated)"
 
         # Simulate speed test output
         echo "Testing download speed..."
@@ -117,7 +117,7 @@ mock_curl() {
     local args=("$@")
 
     if is_mocked "network"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} curl $url ${args[*]}"
+        echo -e "  [MOCK] curl $url ${args[*]}"
 
         if [[ "$MOCK_INTERNET_CONNECTIVITY" == "true" ]]; then
             # Simulate successful HTTP response
@@ -146,7 +146,7 @@ mock_wget() {
     local args=("$@")
 
     if is_mocked "network"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} wget $url ${args[*]}"
+        echo -e "  [MOCK] wget $url ${args[*]}"
 
         if [[ "$MOCK_INTERNET_CONNECTIVITY" == "true" ]]; then
             # Simulate successful download
@@ -170,11 +170,11 @@ mock_wget() {
 # Set up mock network environment
 setup_mock_network() {
     if is_mocked "network"; then
-        echo -e "${MOCK_COLOR}🌐 Setting up mock network environment${NC}"
-        echo -e "${MOCK_COLOR}   → Interfaces: $MOCK_NETWORK_INTERFACES${NC}"
-        echo -e "${MOCK_COLOR}   → Internet connectivity: $MOCK_INTERNET_CONNECTIVITY${NC}"
-        echo -e "${MOCK_COLOR}   → DNS resolution: $MOCK_DNS_RESOLUTION${NC}"
-        echo -e "${MOCK_COLOR}   → Network speed: ${MOCK_NETWORK_SPEED}Mbps${NC}"
+        echo "🌐 Setting up mock network environment"
+        echo "   → Interfaces: $MOCK_NETWORK_INTERFACES"
+        echo "   → Internet connectivity: $MOCK_INTERNET_CONNECTIVITY"
+        echo "   → DNS resolution: $MOCK_DNS_RESOLUTION"
+        echo "   → Network speed: ${MOCK_NETWORK_SPEED}Mbps"
         echo
 
         # Create command aliases for mocking
@@ -203,23 +203,23 @@ validate_mock_network() {
         return 0
     fi
 
-    echo -e "${MOCK_COLOR}🔍 Validating mock network setup${NC}"
+    echo "🔍 Validating mock network setup"
 
     local validation_passed=true
 
     # Test connectivity
     if mock_ping "8.8.8.8" 1 >/dev/null 2>&1; then
-        echo -e "  ${GREEN}✓${NC} Mock connectivity test passed"
+        echo -e "  ✓ Mock connectivity test passed"
     else
-        echo -e "  ${RED}✗${NC} Mock connectivity test failed"
+        echo -e "  ${RED}✗ Mock connectivity test failed"
         validation_passed=false
     fi
 
     # Test DNS resolution
     if mock_nslookup "google.com" >/dev/null 2>&1; then
-        echo -e "  ${GREEN}✓${NC} Mock DNS resolution test passed"
+        echo -e "  ✓ Mock DNS resolution test passed"
     else
-        echo -e "  ${RED}✗${NC} Mock DNS resolution test failed"
+        echo -e "  ${RED}✗ Mock DNS resolution test failed"
         validation_passed=false
     fi
 
@@ -227,17 +227,17 @@ validate_mock_network() {
     local interface_count
     interface_count=$(mock_network_interfaces | wc -l)
     if [[ $interface_count -gt 0 ]]; then
-        echo -e "  ${GREEN}✓${NC} Mock network interfaces: $interface_count found"
+        echo -e "  ✓ Mock network interfaces: $interface_count found"
     else
-        echo -e "  ${RED}✗${NC} No mock network interfaces found"
+        echo -e "  ${RED}✗ No mock network interfaces found"
         validation_passed=false
     fi
 
     if [[ "$validation_passed" == "true" ]]; then
-        echo -e "${MOCK_COLOR}✅ Mock network validation passed${NC}"
+        echo "✅ Mock network validation passed"
         return 0
     else
-        echo -e "${MOCK_COLOR}❌ Mock network validation failed${NC}"
+        echo "❌ Mock network validation failed"
         return 1
     fi
 }

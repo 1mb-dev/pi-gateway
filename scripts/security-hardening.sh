@@ -14,13 +14,13 @@ if [[ ${BASH_VERSION%%.*} -lt 4 ]]; then
 fi
 
 # Colors
-readonly GREEN='\033[0;32m'
-readonly RED='\033[0;31m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
+
+
+
+
 readonly CYAN='\033[0;36m'
-readonly PURPLE='\033[0;35m'
-readonly NC='\033[0m'
+
+
 
 # Configuration
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -38,11 +38,11 @@ readonly DEFAULT_PROFILE="standard"
 
 # Logging functions
 log() { echo "$(date '+%Y-%m-%d %H:%M:%S') $*" | tee -a "$COMPLIANCE_LOG"; }
-success() { echo -e "  ${GREEN}✓${NC} $1" | tee -a "$COMPLIANCE_LOG"; }
-error() { echo -e "  ${RED}✗${NC} $1" | tee -a "$COMPLIANCE_LOG"; }
-warning() { echo -e "  ${YELLOW}⚠${NC} $1" | tee -a "$COMPLIANCE_LOG"; }
-info() { echo -e "  ${BLUE}ℹ${NC} $1" | tee -a "$COMPLIANCE_LOG"; }
-debug() { [[ "${DEBUG:-}" == "true" ]] && echo -e "  ${PURPLE}🔍${NC} $1" | tee -a "$COMPLIANCE_LOG"; }
+success() { echo -e "  $1" | tee -a "$COMPLIANCE_LOG"; }
+error() { echo -e "  $1" | tee -a "$COMPLIANCE_LOG"; }
+warning() { echo -e "  $1" | tee -a "$COMPLIANCE_LOG"; }
+info() { echo -e "  $1" | tee -a "$COMPLIANCE_LOG"; }
+debug() { [[ "${DEBUG:-}" == "true" ]] && echo -e "  $1" | tee -a "$COMPLIANCE_LOG"; }
 
 # Initialize security system
 initialize_security() {
@@ -689,14 +689,14 @@ generate_security_report() {
     # Also output summary to console
     echo
     info "Security Hardening Summary:"
-    success "✓ Kernel hardening applied"
-    success "✓ Network hardening applied"
-    success "✓ SSH hardening applied"
-    success "✓ Firewall configured"
-    success "✓ File system secured"
-    success "✓ Audit system enabled"
-    success "✓ Unnecessary services disabled"
-    success "✓ Compliance checks completed"
+    success "Kernel hardening applied"
+    success "Network hardening applied"
+    success "SSH hardening applied"
+    success "Firewall configured"
+    success "File system secured"
+    success "Audit system enabled"
+    success "Unnecessary services disabled"
+    success "Compliance checks completed"
 
     update_security_state "last_report" "$report_file"
 }
@@ -743,7 +743,7 @@ run_security_hardening() {
 
 # Show security status
 show_security_status() {
-    echo -e "${CYAN}🔒 Pi Gateway Security Status${NC}"
+    echo -e "${CYAN}Pi Gateway Security Status"
     echo
 
     if [[ ! -f "$SECURITY_STATE" ]]; then

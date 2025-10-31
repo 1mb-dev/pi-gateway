@@ -15,8 +15,8 @@ VERBOSE_DRY_RUN="${VERBOSE_DRY_RUN:-false}"
 DRY_RUN_LOG="${DRY_RUN_LOG:-/tmp/pi-gateway-dry-run.log}"
 
 # Colors for dry-run output (avoid conflicts with script colors)
-DRY_RUN_COLOR='\033[0;36m'  # Cyan
-MOCK_COLOR='\033[0;35m'     # Magenta
+
+
 
 # Initialize dry-run logging
 init_dry_run_log() {
@@ -37,7 +37,7 @@ execute_command() {
     local cmd="$*"
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "  ${DRY_RUN_COLOR}[DRY-RUN]${NC} $cmd"
+        echo -e "  [DRY-RUN] $cmd"
         echo "DRY_RUN: $cmd" >> "$DRY_RUN_LOG"
 
         if [[ "$VERBOSE_DRY_RUN" == "true" ]]; then
@@ -59,7 +59,7 @@ safe_file_operation() {
     local content="$3"
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "  ${DRY_RUN_COLOR}[DRY-RUN]${NC} $operation $file"
+        echo -e "  [DRY-RUN] $operation $file"
         echo "DRY_RUN: $operation $file" >> "$DRY_RUN_LOG"
 
         if [[ "$VERBOSE_DRY_RUN" == "true" ]]; then
@@ -109,7 +109,7 @@ mock_package_operation() {
     local packages=("$@")
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "  ${DRY_RUN_COLOR}[DRY-RUN]${NC} apt $operation ${packages[*]}"
+        echo -e "  [DRY-RUN] apt $operation ${packages[*]}"
         echo "DRY_RUN: apt $operation ${packages[*]}" >> "$DRY_RUN_LOG"
 
         if [[ "$VERBOSE_DRY_RUN" == "true" ]]; then
@@ -129,7 +129,7 @@ mock_service_operation() {
     local service="$2"
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "  ${DRY_RUN_COLOR}[DRY-RUN]${NC} systemctl $operation $service"
+        echo -e "  [DRY-RUN] systemctl $operation $service"
         echo "DRY_RUN: systemctl $operation $service" >> "$DRY_RUN_LOG"
 
         if [[ "$VERBOSE_DRY_RUN" == "true" ]]; then
@@ -148,7 +148,7 @@ mock_system_config() {
     local value="$3"
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "  ${DRY_RUN_COLOR}[DRY-RUN]${NC} $operation $parameter = $value"
+        echo -e "  [DRY-RUN] $operation $parameter = $value"
         echo "DRY_RUN: $operation $parameter = $value" >> "$DRY_RUN_LOG"
 
         if [[ "$VERBOSE_DRY_RUN" == "true" ]]; then
@@ -172,20 +172,20 @@ mock_system_config() {
 print_dry_run_summary() {
     if [[ "$DRY_RUN" == "true" ]]; then
         echo
-        echo -e "${DRY_RUN_COLOR}======================================${NC}"
-        echo -e "${DRY_RUN_COLOR}       DRY-RUN EXECUTION SUMMARY      ${NC}"
-        echo -e "${DRY_RUN_COLOR}======================================${NC}"
-        echo -e "${DRY_RUN_COLOR}Mode:${NC} Dry-run simulation"
-        echo -e "${DRY_RUN_COLOR}Log:${NC} $DRY_RUN_LOG"
+        echo "======================================"
+        echo "       DRY-RUN EXECUTION SUMMARY      "
+        echo "======================================"
+        echo "Mode: Dry-run simulation"
+        echo "Log: $DRY_RUN_LOG"
 
         if [[ -f "$DRY_RUN_LOG" ]]; then
             local command_count
             command_count=$(grep -c "^DRY_RUN:" "$DRY_RUN_LOG")
-            echo -e "${DRY_RUN_COLOR}Commands simulated:${NC} $command_count"
+            echo "Commands simulated: $command_count"
         fi
 
-        echo -e "${DRY_RUN_COLOR}Status:${NC} No actual system changes made"
-        echo -e "${DRY_RUN_COLOR}======================================${NC}"
+        echo "Status: No actual system changes made"
+        echo "======================================"
         echo
     fi
 }
@@ -219,13 +219,13 @@ is_mocked() {
 init_dry_run_environment() {
     if [[ "$DRY_RUN" == "true" ]]; then
         init_dry_run_log
-        echo -e "${DRY_RUN_COLOR}🧪 Pi Gateway Dry-Run Mode Enabled${NC}"
-        echo -e "${DRY_RUN_COLOR}   → No actual system changes will be made${NC}"
-        echo -e "${DRY_RUN_COLOR}   → All commands will be simulated${NC}"
+        echo "Pi Gateway Dry-Run Mode Enabled"
+        echo "   → No actual system changes will be made"
+        echo "   → All commands will be simulated"
         if [[ "$VERBOSE_DRY_RUN" == "true" ]]; then
-            echo -e "${DRY_RUN_COLOR}   → Verbose output enabled${NC}"
+            echo "   → Verbose output enabled"
         fi
-        echo -e "${DRY_RUN_COLOR}   → Log file: $DRY_RUN_LOG${NC}"
+        echo "   → Log file: $DRY_RUN_LOG"
         echo
     fi
 }

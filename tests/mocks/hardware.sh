@@ -81,7 +81,7 @@ mock_cpu_cores_detection() {
 # Mock OS detection
 mock_os_detection() {
     if is_mocked "hardware"; then
-        echo -e "  ${MOCK_COLOR}[MOCK]${NC} OS: Raspberry Pi OS (simulated)"
+        echo -e "  [MOCK] OS: Raspberry Pi OS (simulated)"
 
         # Create mock os-release
         cat > /tmp/mock-os-release << 'EOF'
@@ -118,12 +118,12 @@ mock_kernel_detection() {
 # Set up mock hardware environment
 setup_mock_hardware() {
     if is_mocked "hardware"; then
-        echo -e "${MOCK_COLOR}🔧 Setting up mock Pi hardware environment${NC}"
-        echo -e "${MOCK_COLOR}   → Model: $MOCK_PI_MODEL${NC}"
-        echo -e "${MOCK_COLOR}   → Memory: ${MOCK_PI_MEMORY_MB}MB${NC}"
-        echo -e "${MOCK_COLOR}   → Storage: ${MOCK_PI_STORAGE_GB}GB${NC}"
-        echo -e "${MOCK_COLOR}   → Architecture: $MOCK_PI_ARCHITECTURE${NC}"
-        echo -e "${MOCK_COLOR}   → CPU cores: $MOCK_PI_CPU_CORES${NC}"
+        echo "🔧 Setting up mock Pi hardware environment"
+        echo "   → Model: $MOCK_PI_MODEL"
+        echo "   → Memory: ${MOCK_PI_MEMORY_MB}MB"
+        echo "   → Storage: ${MOCK_PI_STORAGE_GB}GB"
+        echo "   → Architecture: $MOCK_PI_ARCHITECTURE"
+        echo "   → CPU cores: $MOCK_PI_CPU_CORES"
         echo
 
         # Set up mock files
@@ -150,43 +150,43 @@ validate_mock_hardware() {
         return 0
     fi
 
-    echo -e "${MOCK_COLOR}🔍 Validating mock hardware setup${NC}"
+    echo "🔍 Validating mock hardware setup"
 
     local validation_passed=true
 
     # Check mock model
     if ! mock_raspberry_pi_detection >/dev/null; then
-        echo -e "  ${RED}✗${NC} Mock Pi model detection failed"
+        echo -e "  ${RED}✗ Mock Pi model detection failed"
         validation_passed=false
     else
-        echo -e "  ${GREEN}✓${NC} Mock Pi model: $(mock_raspberry_pi_detection)"
+        echo -e "  ✓ Mock Pi model: $(mock_raspberry_pi_detection)"
     fi
 
     # Check mock memory
     local mem_kb
     mem_kb=$(mock_memory_detection)
     if [[ -z "$mem_kb" ]]; then
-        echo -e "  ${RED}✗${NC} Mock memory detection failed"
+        echo -e "  ${RED}✗ Mock memory detection failed"
         validation_passed=false
     else
-        echo -e "  ${GREEN}✓${NC} Mock memory: $((mem_kb / 1024))MB"
+        echo -e "  ✓ Mock memory: $((mem_kb / 1024))MB"
     fi
 
     # Check mock architecture
     local arch
     arch=$(mock_architecture_detection)
     if [[ -z "$arch" ]]; then
-        echo -e "  ${RED}✗${NC} Mock architecture detection failed"
+        echo -e "  ${RED}✗ Mock architecture detection failed"
         validation_passed=false
     else
-        echo -e "  ${GREEN}✓${NC} Mock architecture: $arch"
+        echo -e "  ✓ Mock architecture: $arch"
     fi
 
     if [[ "$validation_passed" == "true" ]]; then
-        echo -e "${MOCK_COLOR}✅ Mock hardware validation passed${NC}"
+        echo "✅ Mock hardware validation passed"
         return 0
     else
-        echo -e "${MOCK_COLOR}❌ Mock hardware validation failed${NC}"
+        echo "❌ Mock hardware validation failed"
         return 1
     fi
 }

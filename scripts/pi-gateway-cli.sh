@@ -7,14 +7,14 @@
 set -euo pipefail
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
+
+
+
+
+
 readonly CYAN='\033[0;36m'
 readonly WHITE='\033[1;37m'
-readonly NC='\033[0m' # No Color
+
 
 # Configuration
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -23,24 +23,24 @@ readonly VERSION="1.1.0"
 
 # Logging functions
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo -e "  $1"
 }
 
 header() {
     echo
-    echo -e "${CYAN}$1${NC}"
+    echo -e "${CYAN}$1"
     echo
 }
 
@@ -48,10 +48,10 @@ header() {
 print_header() {
     clear
     echo
-    echo -e "${BLUE}════════════════════════════════════════════════════════════${NC}"
-    echo -e "${BLUE}                      ${WHITE}Pi Gateway CLI${NC}${BLUE}                        ${NC}"
-    echo -e "${BLUE}                    ${CYAN}v${VERSION} - Easy Management${NC}${BLUE}                   ${NC}"
-    echo -e "${BLUE}════════════════════════════════════════════════════════════${NC}"
+    echo "════════════════════════════════════════════════════════════"
+    echo "                      ${WHITE}Pi Gateway CLI                        "
+    echo "                    ${CYAN}v${VERSION} - Easy Management                   "
+    echo "════════════════════════════════════════════════════════════"
     echo
 }
 
@@ -85,11 +85,11 @@ show_help() {
 # Status command
 cmd_status() {
     print_header
-    echo -e "${CYAN}📊 Pi Gateway System Status${NC}"
+    echo -e "${CYAN}📊 Pi Gateway System Status"
     echo
 
     # Quick system info
-    echo -e "${BLUE}System Information:${NC}"
+    echo "System Information:"
     info "Hostname: $(hostname)"
     info "Uptime: $(uptime -p)"
     info "Load: $(uptime | awk -F'load average:' '{print $2}')"
@@ -104,7 +104,7 @@ cmd_status() {
         info "Run basic service checks..."
 
         # Basic service checks
-        echo -e "${BLUE}Core Services:${NC}"
+        echo "Core Services:"
         for service in ssh ufw fail2ban; do
             if systemctl is-active --quiet "$service" 2>/dev/null; then
                 success "$service: Active"
@@ -135,7 +135,7 @@ cmd_vpn() {
                 exit 1
             fi
 
-            header "🔐 Adding VPN Client: $client_name"
+            header "Adding VPN Client: $client_name"
 
             if [[ -f "$SCRIPT_DIR/vpn-client-add.sh" ]]; then
                 "$SCRIPT_DIR/vpn-client-add.sh" "$client_name"
@@ -168,7 +168,7 @@ cmd_vpn() {
 
             if command -v wg >/dev/null 2>&1; then
                 if sudo wg show wg0 >/dev/null 2>&1; then
-                    echo -e "${BLUE}WireGuard Interface:${NC}"
+                    echo "WireGuard Interface:"
                     sudo wg show wg0
                     echo
 
@@ -184,7 +184,7 @@ cmd_vpn() {
             ;;
 
         status)
-            header "🔍 VPN Service Status"
+            header "VPN Service Status"
 
             # Check WireGuard service
             if systemctl is-active --quiet "wg-quick@wg0" 2>/dev/null; then
@@ -205,7 +205,7 @@ cmd_vpn() {
             # Show interface info
             if command -v wg >/dev/null 2>&1 && sudo wg show wg0 >/dev/null 2>&1; then
                 echo
-                echo -e "${BLUE}Interface Details:${NC}"
+                echo "Interface Details:"
                 sudo wg show wg0
             fi
             ;;
@@ -313,16 +313,16 @@ cmd_logs() {
 
     case $service in
         ssh)
-            header "🔐 SSH Access Logs"
-            echo -e "${BLUE}Recent SSH connections:${NC}"
+            header "SSH Access Logs"
+            echo "Recent SSH connections:"
             sudo grep "Accepted\|Failed" /var/log/auth.log | tail -20
             echo
-            echo -e "${BLUE}Current SSH sessions:${NC}"
+            echo "Current SSH sessions:"
             who
             ;;
 
         vpn|wireguard)
-            header "🔒 VPN Service Logs"
+            header "VPN Service Logs"
             sudo journalctl -u wg-quick@wg0 --no-pager -n 20
             ;;
 
@@ -368,13 +368,13 @@ cmd_logs() {
 
         "")
             header "📄 Recent System Activity"
-            echo -e "${BLUE}System errors (last 10):${NC}"
+            echo "System errors (last 10):"
             sudo journalctl -p err --no-pager -n 10
             echo
-            echo -e "${BLUE}SSH activity (last 10):${NC}"
+            echo "SSH activity (last 10):"
             sudo grep "Accepted\|Failed" /var/log/auth.log | tail -10
             echo
-            echo -e "${BLUE}Service status:${NC}"
+            echo "Service status:"
             sudo systemctl --failed --no-pager
             ;;
 
@@ -395,7 +395,7 @@ cmd_security() {
         status)
             header "🛡️  Security Status Overview"
 
-            echo -e "${BLUE}Firewall Status:${NC}"
+            echo "Firewall Status:"
             if command -v ufw >/dev/null 2>&1; then
                 sudo ufw status
             else
@@ -403,7 +403,7 @@ cmd_security() {
             fi
             echo
 
-            echo -e "${BLUE}Intrusion Detection:${NC}"
+            echo "Intrusion Detection:"
             if command -v fail2ban-client >/dev/null 2>&1; then
                 sudo fail2ban-client status
             else
@@ -411,7 +411,7 @@ cmd_security() {
             fi
             echo
 
-            echo -e "${BLUE}SSH Configuration:${NC}"
+            echo "SSH Configuration:"
             if sudo grep -q "PasswordAuthentication no" /etc/ssh/sshd_config; then
                 success "Password authentication: Disabled"
             else
@@ -426,17 +426,17 @@ cmd_security() {
             ;;
 
         scan)
-            header "🔍 Security Scan"
+            header "Security Scan"
 
-            echo -e "${BLUE}Open ports:${NC}"
+            echo "Open ports:"
             sudo ss -tulpn | grep LISTEN
             echo
 
-            echo -e "${BLUE}Recent failed logins:${NC}"
+            echo "Recent failed logins:"
             sudo grep "Failed password" /var/log/auth.log | tail -10
             echo
 
-            echo -e "${BLUE}Active network connections:${NC}"
+            echo "Active network connections:"
             sudo ss -tupn | grep ESTAB | head -10
             ;;
 
@@ -461,21 +461,21 @@ cmd_security() {
 cmd_update() {
     header "📦 System Update"
 
-    echo -e "${BLUE}Updating package lists...${NC}"
+    echo "Updating package lists..."
     sudo apt update
     echo
 
-    echo -e "${BLUE}Available upgrades:${NC}"
+    echo "Available upgrades:"
     apt list --upgradable 2>/dev/null | head -20
     echo
 
-    read -r -p "$(echo -e "${YELLOW}Proceed with system upgrade? [y/N]: ${NC}")" confirm
+    read -r -p "$(echo "Proceed with system upgrade? [y/N]: ")" confirm
     if [[ $confirm =~ ^[Yy] ]]; then
-        echo -e "${BLUE}Upgrading system...${NC}"
+        echo "Upgrading system..."
         sudo apt upgrade -y
         echo
 
-        echo -e "${BLUE}Cleaning up...${NC}"
+        echo "Cleaning up..."
         sudo apt autoremove -y
         sudo apt autoclean
 
@@ -509,44 +509,44 @@ cmd_setup() {
 show_menu() {
     print_header
 
-    echo -e "${CYAN}📋 Quick Actions Menu${NC}"
+    echo -e "${CYAN}📋 Quick Actions Menu"
     echo
-    echo -e "  ${YELLOW}1.${NC} System Status"
-    echo -e "  ${YELLOW}2.${NC} VPN Management"
-    echo -e "  ${YELLOW}3.${NC} View Logs"
-    echo -e "  ${YELLOW}4.${NC} Security Check"
-    echo -e "  ${YELLOW}5.${NC} Create Backup"
-    echo -e "  ${YELLOW}6.${NC} System Update"
-    echo -e "  ${YELLOW}7.${NC} Help"
-    echo -e "  ${YELLOW}0.${NC} Exit"
+    echo -e "  1. System Status"
+    echo -e "  2. VPN Management"
+    echo -e "  3. View Logs"
+    echo -e "  4. Security Check"
+    echo -e "  5. Create Backup"
+    echo -e "  6. System Update"
+    echo -e "  7. Help"
+    echo -e "  0. Exit"
     echo
 
-    read -r -p "$(echo -e "${BLUE}Select option [0-7]: ${NC}")" choice
+    read -r -p "$(echo "Select option [0-7]: ")" choice
 
     case $choice in
         1) cmd_status ;;
         2)
             echo
             echo "VPN Commands: add <name>, remove <name>, list, status"
-            read -r -p "$(echo -e "${BLUE}Enter VPN command: ${NC}")" vpn_cmd
+            read -r -p "$(echo "Enter VPN command: ")" vpn_cmd
             cmd_vpn "$vpn_cmd"
             ;;
         3)
             echo
             echo "Log types: ssh, vpn, firewall, fail2ban, system, errors"
-            read -r -p "$(echo -e "${BLUE}Enter log type (or press Enter for overview): ${NC}")" log_type
+            read -r -p "$(echo "Enter log type (or press Enter for overview): ")" log_type
             cmd_logs "$log_type"
             ;;
         4) cmd_security status ;;
         5) cmd_backup create ;;
         6) cmd_update ;;
         7) show_help ;;
-        0) echo -e "${GREEN}Goodbye!${NC}"; exit 0 ;;
+        0) echo "Goodbye!"; exit 0 ;;
         *) error "Invalid option: $choice" ;;
     esac
 
     echo
-    read -r -p "$(echo -e "${CYAN}Press Enter to continue...${NC}")"
+    read -r -p "$(echo -e "${CYAN}Press Enter to continue...")"
     show_menu
 }
 

@@ -20,11 +20,11 @@ if [[ -f "$(dirname "$0")/../tests/mocks/network.sh" ]]; then
 fi
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly NC='\033[0m' # No Color
+
+
+
+
+
 
 # Script configuration
 readonly LOG_FILE="/tmp/pi-gateway-check.log"
@@ -50,30 +50,30 @@ log() {
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}    Pi Gateway - System Requirements Check    ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "    Pi Gateway - System Requirements Check    "
+    echo "================================================"
     echo
 }
 
 print_section() {
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
 check_pass() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
     ((CHECKS_PASSED++))
     log "PASS: $1"
 }
 
 check_fail() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
     ((CHECKS_FAILED++))
     log "FAIL: $1"
 }
 
 check_warn() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
     ((WARNINGS++))
     log "WARN: $1"
 }
@@ -429,39 +429,39 @@ check_essential_commands() {
     echo "Optional commands:"
     for cmd in "${optional_commands[@]}"; do
         if command -v "$cmd" >/dev/null 2>&1; then
-            echo "  ${GREEN}✓${NC} $cmd is available"
+            echo "  $cmd is available"
         else
-            echo "  ${YELLOW}○${NC} $cmd is not installed (optional)"
+            echo "  ○ $cmd is not installed (optional)"
         fi
     done
 }
 
 print_summary() {
     echo
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}              Summary Report                   ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "              Summary Report                   "
+    echo "================================================"
     echo
 
-    echo -e "Checks passed: ${GREEN}$CHECKS_PASSED${NC}"
-    echo -e "Checks failed: ${RED}$CHECKS_FAILED${NC}"
-    echo -e "Warnings: ${YELLOW}$WARNINGS${NC}"
+    echo -e "Checks passed: $CHECKS_PASSED"
+    echo -e "Checks failed: $CHECKS_FAILED"
+    echo -e "Warnings: $WARNINGS"
     echo
 
     if [[ $CHECKS_FAILED -eq 0 ]]; then
-        echo -e "${GREEN}✓ System meets minimum requirements for Pi Gateway installation${NC}"
-        echo -e "You can proceed with: ${BLUE}make setup${NC}"
+        echo "System meets minimum requirements for Pi Gateway installation"
+        echo -e "You can proceed with: make setup"
         exit 0
     elif [[ $CHECKS_FAILED -le 2 && $WARNINGS -le 5 ]]; then
-        echo -e "${YELLOW}⚠ System has some issues but may still work${NC}"
+        echo "System has some issues but may still work"
         echo -e "Review the failed checks above and consider fixing them first"
-        echo -e "You can try proceeding with: ${BLUE}make setup${NC} (at your own risk)"
+        echo -e "You can try proceeding with: make setup (at your own risk)"
         exit 1
     else
-        echo -e "${RED}✗ System does not meet minimum requirements${NC}"
+        echo "System does not meet minimum requirements"
         echo -e "Please address the failed checks before proceeding"
         if command -v is_dry_run >/dev/null 2>&1 && is_dry_run; then
-            echo -e "${BLUE}Note: Dry-run mode - no actual system changes attempted${NC}"
+            echo "Note: Dry-run mode - no actual system changes attempted"
             exit 0  # Always succeed in dry-run mode for testing
         else
             exit 2
@@ -482,48 +482,48 @@ main() {
         echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting Pi Gateway system requirements check"
 
         # Hardware Detection
-        echo -e "${BLUE}--- Hardware Detection ---${NC}"
+        echo "--- Hardware Detection ---"
         if command -v setup_mock_hardware >/dev/null 2>&1; then
             setup_mock_hardware
         fi
         local mock_model="${MOCK_PI_MODEL:-Raspberry Pi 4 Model B Rev 1.4}"
         echo "Detected: $mock_model (TESTING MODE)"
-        echo -e "  ${GREEN}✓${NC} Raspberry Pi model is supported ($mock_model)"
+        echo -e "  Raspberry Pi model is supported ($mock_model)"
 
         # Operating System
-        echo -e "${BLUE}--- Operating System ---${NC}"
+        echo "--- Operating System ---"
         echo "OS: Raspberry Pi OS (TESTING MODE)"
-        echo -e "  ${GREEN}✓${NC} Operating system detected (testing mode)"
+        echo -e "  Operating system detected (testing mode)"
 
         # System Resources
-        echo -e "${BLUE}--- System Resources ---${NC}"
+        echo "--- System Resources ---"
         local memory_mb="${MOCK_PI_MEMORY_MB:-4096}"
         local storage_gb="${MOCK_PI_STORAGE_GB:-32}"
         echo "RAM: ${memory_mb}MB (MOCKED)"
         if [[ $memory_mb -lt 1024 ]]; then
-            echo -e "  ${RED}✗${NC} Insufficient RAM (${memory_mb}MB < 1024MB required)"
+            echo -e "  Insufficient RAM (${memory_mb}MB < 1024MB required)"
         else
-            echo -e "  ${GREEN}✓${NC} Sufficient RAM available (${memory_mb}MB >= 1024MB)"
+            echo -e "  Sufficient RAM available (${memory_mb}MB >= 1024MB)"
         fi
         echo "Storage: ${storage_gb}GB total, 16GB available"
         if [[ $storage_gb -lt 8 ]]; then
-            echo -e "  ${YELLOW}⚠${NC} Limited storage space (${storage_gb}GB < 8GB recommended)"
+            echo -e "  Limited storage space (${storage_gb}GB < 8GB recommended)"
         else
-            echo -e "  ${GREEN}✓${NC} Sufficient storage space (${storage_gb}GB >= 8GB)"
+            echo -e "  Sufficient storage space (${storage_gb}GB >= 8GB)"
         fi
 
         # Network Connectivity
-        echo -e "${BLUE}--- Network Connectivity ---${NC}"
+        echo "--- Network Connectivity ---"
         if command -v setup_mock_network >/dev/null 2>&1; then
             setup_mock_network
         fi
         local mock_internet="${MOCK_INTERNET_CONNECTIVITY:-true}"
         if [[ "$mock_internet" == "false" ]]; then
-            echo -e "  ${RED}✗${NC} No internet connectivity"
+            echo -e "  No internet connectivity"
         else
-            echo -e "  ${GREEN}✓${NC} Internet connectivity available"
+            echo -e "  Internet connectivity available"
         fi
-        echo -e "  ${GREEN}✓${NC} DNS resolution working"
+        echo -e "  DNS resolution working"
 
         # Success exit for testing
         exit 0
@@ -568,7 +568,7 @@ main() {
 }
 
 # Handle script termination
-trap 'echo -e "\n${YELLOW}Requirements check interrupted${NC}"; exit 130' INT
+trap 'echo -e "\nRequirements check interrupted"; exit 130' INT
 
 # Run main function
 main "$@"

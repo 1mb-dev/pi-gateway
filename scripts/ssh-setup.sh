@@ -7,12 +7,12 @@
 set -euo pipefail
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly NC='\033[0m' # No Color
+
+
+
+
+
+
 
 # Configuration
 readonly SCRIPT_NAME="$(basename "$0")"
@@ -48,42 +48,42 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo -e "  $1"
     log "INFO" "$1"
 }
 
 debug() {
     if [[ "${VERBOSE_DRY_RUN:-false}" == "true" ]]; then
-        echo -e "  ${PURPLE}🔍${NC} $1"
+        echo -e "  $1"
         log "DEBUG" "$1"
     fi
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}       Pi Gateway - SSH Hardening Setup       ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "       Pi Gateway - SSH Hardening Setup       "
+    echo "================================================"
     echo
 }
 
 print_section() {
     echo
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
 # Execute command with dry-run support
@@ -93,9 +93,9 @@ execute_command() {
 
     if [[ "$DRY_RUN" == "true" ]]; then
         if [[ -n "$description" ]]; then
-            echo -e "  ${PURPLE}[DRY-RUN]${NC} $description"
+            echo -e "  [DRY-RUN] $description"
         fi
-        echo -e "  ${PURPLE}[DRY-RUN]${NC} $cmd"
+        echo -e "  [DRY-RUN] $cmd"
         debug "Command would execute: $cmd"
         return 0
     else
@@ -109,10 +109,10 @@ execute_command() {
 # Initialize dry-run environment
 init_dry_run_environment() {
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "${PURPLE}🧪 Pi Gateway Dry-Run Mode Enabled${NC}"
-        echo -e "${PURPLE}   → No actual system changes will be made${NC}"
-        echo -e "${PURPLE}   → All SSH configuration will be simulated${NC}"
-        echo -e "${PURPLE}   → Log file: $LOG_FILE${NC}"
+        echo "Pi Gateway Dry-Run Mode Enabled"
+        echo "   → No actual system changes will be made"
+        echo "   → All SSH configuration will be simulated"
+        echo "   → Log file: $LOG_FILE"
         echo
 
         # Initialize mock environment if available (from external mock files)
@@ -313,9 +313,9 @@ create_ssh_banner() {
 ┌─────────────────────────────────────────────────────────────┐
 │                     Pi Gateway Access                       │
 │                                                             │
-│  🔒 This system is for authorized users only               │
-│  🔍 All connections are monitored and logged               │
-│  ⚠️  Unauthorized access is prohibited                      │
+│  This system is for authorized users only               │
+│  All connections are monitored and logged               │
+│  WARNING: Unauthorized access is prohibited                      │
 │                                                             │
 │  Pi Gateway - Secure Homelab Bootstrap                     │
 └─────────────────────────────────────────────────────────────┘
@@ -430,19 +430,19 @@ display_connection_info() {
     print_section "SSH Connection Information"
 
     echo
-    echo -e "${GREEN}🔐 SSH Setup Complete!${NC}"
+    echo "SSH Setup Complete!"
     echo
-    echo -e "${BLUE}Connection Details:${NC}"
-    echo -e "  ${YELLOW}Port:${NC} $DEFAULT_SSH_PORT"
-    echo -e "  ${YELLOW}User:${NC} pi"
-    echo -e "  ${YELLOW}Authentication:${NC} Key-based only"
-    echo -e "  ${YELLOW}Private Key:${NC} /home/pi/.ssh/id_$SSH_KEY_TYPE"
+    echo "Connection Details:"
+    echo -e "  Port: $DEFAULT_SSH_PORT"
+    echo -e "  User: pi"
+    echo -e "  Authentication: Key-based only"
+    echo -e "  Private Key: /home/pi/.ssh/id_$SSH_KEY_TYPE"
     echo
-    echo -e "${BLUE}Connection Commands:${NC}"
-    echo -e "  ${PURPLE}Local:${NC} ssh -p $DEFAULT_SSH_PORT pi@localhost"
-    echo -e "  ${PURPLE}Remote:${NC} ssh -p $DEFAULT_SSH_PORT pi@<your-pi-ip>"
+    echo "Connection Commands:"
+    echo -e "  Local: ssh -p $DEFAULT_SSH_PORT pi@localhost"
+    echo -e "  Remote: ssh -p $DEFAULT_SSH_PORT pi@<your-pi-ip>"
     echo
-    echo -e "${YELLOW}⚠️  Important Security Notes:${NC}"
+    echo "WARNING: Important Security Notes:"
     echo -e "  • Password authentication is disabled"
     echo -e "  • Root login is disabled"
     echo -e "  • SSH is running on port $DEFAULT_SSH_PORT (not 22)"
@@ -451,12 +451,12 @@ display_connection_info() {
     echo
 
     if [[ "$DRY_RUN" == "false" ]]; then
-        echo -e "${BLUE}Private Key (copy to your client):${NC}"
-        echo -e "${PURPLE}========================================${NC}"
+        echo "Private Key (copy to your client):"
+        echo "========================================"
         if [[ -f "/home/pi/.ssh/id_$SSH_KEY_TYPE" ]]; then
             cat "/home/pi/.ssh/id_$SSH_KEY_TYPE"
         fi
-        echo -e "${PURPLE}========================================${NC}"
+        echo "========================================"
         echo
     fi
 

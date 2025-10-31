@@ -7,12 +7,12 @@
 set -euo pipefail
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly NC='\033[0m' # No Color
+
+
+
+
+
+
 
 # Configuration
 readonly SCRIPT_NAME="$(basename "$0")"
@@ -60,42 +60,42 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo -e "  $1"
     log "INFO" "$1"
 }
 
 debug() {
     if [[ "${VERBOSE_DRY_RUN:-false}" == "true" ]]; then
-        echo -e "  ${PURPLE}🔍${NC} $1"
+        echo -e "  $1"
         log "DEBUG" "$1"
     fi
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}       Pi Gateway - Remote Desktop Setup      ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "       Pi Gateway - Remote Desktop Setup      "
+    echo "================================================"
     echo
 }
 
 print_section() {
     echo
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
 # Execute command with dry-run support
@@ -105,9 +105,9 @@ execute_command() {
 
     if [[ "$DRY_RUN" == "true" ]]; then
         if [[ -n "$description" ]]; then
-            echo -e "  ${PURPLE}[DRY-RUN]${NC} $description"
+            echo -e "  [DRY-RUN] $description"
         fi
-        echo -e "  ${PURPLE}[DRY-RUN]${NC} $cmd"
+        echo -e "  [DRY-RUN] $cmd"
         debug "Command would execute: $cmd"
         return 0
     else
@@ -121,10 +121,10 @@ execute_command() {
 # Initialize dry-run environment
 init_dry_run_environment() {
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "${PURPLE}🧪 Pi Gateway Dry-Run Mode Enabled${NC}"
-        echo -e "${PURPLE}   → No actual system changes will be made${NC}"
-        echo -e "${PURPLE}   → All remote desktop configuration will be simulated${NC}"
-        echo -e "${PURPLE}   → Log file: $LOG_FILE${NC}"
+        echo "Pi Gateway Dry-Run Mode Enabled"
+        echo "   → No actual system changes will be made"
+        echo "   → All remote desktop configuration will be simulated"
+        echo "   → Log file: $LOG_FILE"
         echo
 
         # Initialize mock environment if available (from external mock files)
@@ -560,45 +560,45 @@ display_connection_info() {
     fi
 
     echo
-    echo -e "${GREEN}🖥️  Remote Desktop Setup Complete!${NC}"
+    echo "🖥️  Remote Desktop Setup Complete!"
     echo
-    echo -e "${BLUE}VNC Connection Details:${NC}"
-    echo -e "  ${YELLOW}Protocol:${NC} VNC"
-    echo -e "  ${YELLOW}Port:${NC} $VNC_PORT"
-    echo -e "  ${YELLOW}Display:${NC} $VNC_DISPLAY"
-    echo -e "  ${YELLOW}Resolution:${NC} $VNC_GEOMETRY"
-    echo -e "  ${YELLOW}Color Depth:${NC} $VNC_DEPTH bits"
-    echo
-
-    echo -e "${BLUE}RDP Connection Details:${NC}"
-    echo -e "  ${YELLOW}Protocol:${NC} RDP"
-    echo -e "  ${YELLOW}Port:${NC} $RDP_PORT"
-    echo -e "  ${YELLOW}Username:${NC} pi"
-    echo -e "  ${YELLOW}Authentication:${NC} System password"
+    echo "VNC Connection Details:"
+    echo -e "  Protocol: VNC"
+    echo -e "  Port: $VNC_PORT"
+    echo -e "  Display: $VNC_DISPLAY"
+    echo -e "  Resolution: $VNC_GEOMETRY"
+    echo -e "  Color Depth: $VNC_DEPTH bits"
     echo
 
-    echo -e "${BLUE}Connection Methods:${NC}"
-    echo -e "  ${PURPLE}Local VNC:${NC} $local_ip:$VNC_PORT"
-    echo -e "  ${PURPLE}Local RDP:${NC} $local_ip:$RDP_PORT"
-    echo -e "  ${PURPLE}VPN VNC:${NC} 10.13.13.1:$VNC_PORT"
-    echo -e "  ${PURPLE}VPN RDP:${NC} 10.13.13.1:$RDP_PORT"
+    echo "RDP Connection Details:"
+    echo -e "  Protocol: RDP"
+    echo -e "  Port: $RDP_PORT"
+    echo -e "  Username: pi"
+    echo -e "  Authentication: System password"
     echo
 
-    echo -e "${BLUE}Client Applications:${NC}"
-    echo -e "  ${PURPLE}VNC Viewer:${NC} RealVNC Viewer, TightVNC Viewer, TigerVNC"
-    echo -e "  ${PURPLE}RDP Client:${NC} Windows Remote Desktop, Remmina, FreeRDP"
+    echo "Connection Methods:"
+    echo -e "  Local VNC: $local_ip:$VNC_PORT"
+    echo -e "  Local RDP: $local_ip:$RDP_PORT"
+    echo -e "  VPN VNC: 10.13.13.1:$VNC_PORT"
+    echo -e "  VPN RDP: 10.13.13.1:$RDP_PORT"
     echo
 
-    echo -e "${BLUE}Service Management:${NC}"
-    echo -e "  ${PURPLE}VNC Status:${NC} sudo systemctl status vncserver@1.service"
-    echo -e "  ${PURPLE}VNC Start:${NC} sudo systemctl start vncserver@1.service"
-    echo -e "  ${PURPLE}VNC Stop:${NC} sudo systemctl stop vncserver@1.service"
-    echo -e "  ${PURPLE}RDP Status:${NC} sudo systemctl status xrdp"
-    echo -e "  ${PURPLE}RDP Start:${NC} sudo systemctl start xrdp"
-    echo -e "  ${PURPLE}RDP Stop:${NC} sudo systemctl stop xrdp"
+    echo "Client Applications:"
+    echo -e "  VNC Viewer: RealVNC Viewer, TightVNC Viewer, TigerVNC"
+    echo -e "  RDP Client: Windows Remote Desktop, Remmina, FreeRDP"
     echo
 
-    echo -e "${YELLOW}⚠️  Important Security Notes:${NC}"
+    echo "Service Management:"
+    echo -e "  VNC Status: sudo systemctl status vncserver@1.service"
+    echo -e "  VNC Start: sudo systemctl start vncserver@1.service"
+    echo -e "  VNC Stop: sudo systemctl stop vncserver@1.service"
+    echo -e "  RDP Status: sudo systemctl status xrdp"
+    echo -e "  RDP Start: sudo systemctl start xrdp"
+    echo -e "  RDP Stop: sudo systemctl stop xrdp"
+    echo
+
+    echo "WARNING: Important Security Notes:"
     echo -e "  • Remote desktop access is restricted to VPN and local network only"
     echo -e "  • Use strong passwords for the 'pi' user account"
     echo -e "  • VNC password is automatically generated and secure"
@@ -607,12 +607,12 @@ display_connection_info() {
     echo
 
     if [[ "$DRY_RUN" == "false" ]] && [[ -f "$VNC_PASSWORD_FILE" ]]; then
-        echo -e "${BLUE}VNC Password:${NC}"
-        echo -e "${PURPLE}========================================${NC}"
+        echo "VNC Password:"
+        echo "========================================"
         if command -v vncpasswd >/dev/null 2>&1; then
             info "VNC password has been set (check logs for generated password)"
         fi
-        echo -e "${PURPLE}========================================${NC}"
+        echo "========================================"
         echo
     fi
 

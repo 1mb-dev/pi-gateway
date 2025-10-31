@@ -22,35 +22,35 @@ WARNING_COUNT=0
 # Check functions
 check_start() {
     ((CHECK_COUNT++))
-    echo -n "  ${CYAN}[$CHECK_COUNT]${NC} $1... "
+    echo -n "  ${CYAN}[$CHECK_COUNT] $1... "
 }
 
 check_pass() {
     ((PASS_COUNT++))
-    echo -e "${GREEN}✅ PASS${NC}"
-    [[ -n "${1:-}" ]] && echo -e "      ${WHITE}→${NC} $1"
+    echo "✅ PASS"
+    [[ -n "${1:-}" ]] && echo -e "      ${WHITE}→ $1"
 }
 
 check_fail() {
     ((FAIL_COUNT++))
-    echo -e "${RED}❌ FAIL${NC}"
-    [[ -n "${1:-}" ]] && echo -e "      ${WHITE}→${NC} $1"
+    echo "❌ FAIL"
+    [[ -n "${1:-}" ]] && echo -e "      ${WHITE}→ $1"
 }
 
 check_warning() {
     ((WARNING_COUNT++))
-    echo -e "${YELLOW}⚠️  WARN${NC}"
-    [[ -n "${1:-}" ]] && echo -e "      ${WHITE}→${NC} $1"
+    echo "WARNING: WARN"
+    [[ -n "${1:-}" ]] && echo -e "      ${WHITE}→ $1"
 }
 
 # Header
 show_header() {
     clear
     echo
-    echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${BLUE}║               ${WHITE}Pi Gateway Pre-Flight Check${NC}${BLUE}               ║${NC}"
-    echo -e "${BLUE}║     ${CYAN}Validating system requirements before setup${NC}${BLUE}      ║${NC}"
-    echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo "╔════════════════════════════════════════════════════════════╗"
+    echo "║               ${WHITE}Pi Gateway Pre-Flight Check               ║"
+    echo "║     ${CYAN}Validating system requirements before setup      ║"
+    echo "╚════════════════════════════════════════════════════════════╝"
     echo
 }
 
@@ -132,21 +132,21 @@ check_required_commands() {
 # Results summary
 show_summary() {
     echo
-    echo -e "${BLUE}╔════════════════════════════════════════════════════════════╗${NC}"
-    echo -e "${BLUE}║                        ${WHITE}Summary${NC}${BLUE}                         ║${NC}"
-    echo -e "${BLUE}╚════════════════════════════════════════════════════════════╝${NC}"
+    echo "╔════════════════════════════════════════════════════════════╗"
+    echo "║                        ${WHITE}Summary                         ║"
+    echo "╚════════════════════════════════════════════════════════════╝"
     echo
-    echo -e "  ${WHITE}Total checks:${NC} $CHECK_COUNT"
-    echo -e "  ${GREEN}Passed:${NC} $PASS_COUNT"
-    echo -e "  ${YELLOW}Warnings:${NC} $WARNING_COUNT"
-    echo -e "  ${RED}Failed:${NC} $FAIL_COUNT"
+    echo -e "  ${WHITE}Total checks: $CHECK_COUNT"
+    echo -e "  Passed: $PASS_COUNT"
+    echo -e "  Warnings: $WARNING_COUNT"
+    echo -e "  Failed: $FAIL_COUNT"
     echo
 
     if [[ $FAIL_COUNT -eq 0 ]]; then
-        echo -e "  ${GREEN}🎉 System ready for Pi Gateway installation!${NC}"
+        echo -e "  🎉 System ready for Pi Gateway installation!"
         return 0
     else
-        echo -e "  ${RED}⛔ Please resolve issues before proceeding.${NC}"
+        echo -e "  ⛔ Please resolve issues before proceeding."
         return 1
     fi
 }
@@ -156,7 +156,7 @@ main() {
     init_logging "pre-flight-check"
     show_header
 
-    echo -e "${WHITE}Running system validation checks...${NC}"
+    echo -e "${WHITE}Running system validation checks..."
     echo
 
     # Run all checks

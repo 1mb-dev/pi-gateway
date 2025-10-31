@@ -83,35 +83,17 @@ log() {
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}    Pi Gateway - Dependency Installation      ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "    Pi Gateway - Dependency Installation      "
+    echo "================================================"
     echo
 }
 
 print_section() {
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
-success() {
-    echo -e "  ${GREEN}✓${NC} $1"
-    log "SUCCESS: $1"
-}
-
-error() {
-    echo -e "  ${RED}✗${NC} $1"
-    log "ERROR: $1"
-}
-
-warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
-    log "WARNING: $1"
-}
-
-info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
-    log "INFO: $1"
-}
+# Use success(), error(), warning(), info() from common.sh
 
 # Pre-installation checks
 check_prerequisites() {

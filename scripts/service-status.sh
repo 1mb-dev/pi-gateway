@@ -7,14 +7,14 @@
 set -euo pipefail
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
+
+
+
+
+
 readonly CYAN='\033[0;36m'
 readonly WHITE='\033[1;37m'
-readonly NC='\033[0m' # No Color
+
 
 # Configuration
 readonly SCRIPT_NAME="$(basename "$0")"
@@ -62,50 +62,50 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo -e "  $1"
     log "INFO" "$1"
 }
 
 print_header() {
     clear
     echo
-    echo -e "${BLUE}════════════════════════════════════════════════════════════${NC}"
-    echo -e "${BLUE}                    ${WHITE}Pi Gateway Service Status${NC}${BLUE}                   ${NC}"
-    echo -e "${BLUE}════════════════════════════════════════════════════════════${NC}"
+    echo "════════════════════════════════════════════════════════════"
+    echo "                    ${WHITE}Pi Gateway Service Status                   "
+    echo "════════════════════════════════════════════════════════════"
     echo
-    echo -e "${CYAN}📊 Comprehensive Health Check for Pi Gateway Services${NC}"
+    echo -e "${CYAN}📊 Comprehensive Health Check for Pi Gateway Services"
     echo
 }
 
 print_summary() {
     echo
-    echo -e "${CYAN}📈 Service Status Summary:${NC}"
-    echo -e "  ${GREEN}Running:${NC} $RUNNING_SERVICES/$TOTAL_SERVICES"
-    echo -e "  ${RED}Failed:${NC} $FAILED_SERVICES/$TOTAL_SERVICES"
-    echo -e "  ${YELLOW}Warnings:${NC} $WARNING_SERVICES/$TOTAL_SERVICES"
+    echo -e "${CYAN}📈 Service Status Summary:"
+    echo -e "  Running: $RUNNING_SERVICES/$TOTAL_SERVICES"
+    echo -e "  Failed: $FAILED_SERVICES/$TOTAL_SERVICES"
+    echo -e "  Warnings: $WARNING_SERVICES/$TOTAL_SERVICES"
     echo
 
     if [[ $FAILED_SERVICES -eq 0 && $WARNING_SERVICES -eq 0 ]]; then
-        echo -e "${GREEN}🎉 All services are running perfectly!${NC}"
+        echo "🎉 All services are running perfectly!"
     elif [[ $FAILED_SERVICES -eq 0 ]]; then
-        echo -e "${YELLOW}⚠️  All services running with some warnings${NC}"
+        echo "WARNING: All services running with some warnings"
     else
-        echo -e "${RED}❌ Some services have failed - attention required${NC}"
+        echo "❌ Some services have failed - attention required"
     fi
 }
 
@@ -114,7 +114,7 @@ check_systemd_service() {
     local service="$1"
     local description="$2"
 
-    echo -e "${CYAN}🔍 Checking: $description${NC}"
+    echo -e "${CYAN}Checking: $description"
 
     ((TOTAL_SERVICES++))
 
@@ -201,7 +201,7 @@ check_port_availability() {
 
 check_configuration_files() {
     echo
-    echo -e "${CYAN}📁 Configuration File Status:${NC}"
+    echo -e "${CYAN}📁 Configuration File Status:"
 
     for service in "${!SERVICE_CONFIGS[@]}"; do
         local config_file="${SERVICE_CONFIGS[$service]}"
@@ -242,7 +242,7 @@ check_configuration_files() {
 
 check_network_connectivity() {
     echo
-    echo -e "${CYAN}🌐 Network Connectivity:${NC}"
+    echo -e "${CYAN}🌐 Network Connectivity:"
 
     # Check internet connectivity
     if ping -c 1 -W 5 8.8.8.8 >/dev/null 2>&1; then
@@ -278,7 +278,7 @@ check_network_connectivity() {
 
 check_firewall_status() {
     echo
-    echo -e "${CYAN}🔥 Firewall Status:${NC}"
+    echo -e "${CYAN}🔥 Firewall Status:"
 
     if command -v ufw >/dev/null 2>&1; then
         local ufw_status
@@ -314,7 +314,7 @@ check_firewall_status() {
 
 check_vpn_status() {
     echo
-    echo -e "${CYAN}🔒 VPN Status:${NC}"
+    echo -e "${CYAN}VPN Status:"
 
     # Check WireGuard interface
     if command -v wg >/dev/null 2>&1; then
@@ -342,7 +342,7 @@ check_vpn_status() {
 
 check_system_resources() {
     echo
-    echo -e "${CYAN}💻 System Resources:${NC}"
+    echo -e "${CYAN}💻 System Resources:"
 
     # Check CPU usage
     if command -v top >/dev/null 2>&1; then
@@ -394,7 +394,7 @@ check_system_resources() {
 
 check_log_files() {
     echo
-    echo -e "${CYAN}📄 Log File Status:${NC}"
+    echo -e "${CYAN}📄 Log File Status:"
 
     local log_files=(
         "/var/log/auth.log:Authentication"
@@ -433,14 +433,14 @@ main() {
     log "INFO" "Starting Pi Gateway service status check"
 
     # Check core services
-    echo -e "${CYAN}🔧 Core Services:${NC}"
+    echo -e "${CYAN}🔧 Core Services:"
     for service in "${!SERVICES[@]}"; do
         check_systemd_service "$service" "${SERVICES[$service]}"
         echo
     done
 
     # Check network ports
-    echo -e "${CYAN}🔌 Network Ports:${NC}"
+    echo -e "${CYAN}🔌 Network Ports:"
     for service in "${!SERVICE_PORTS[@]}"; do
         check_port_availability "${SERVICE_PORTS[$service]}" "$service"
     done
@@ -457,11 +457,11 @@ main() {
     print_summary
 
     echo
-    echo -e "${CYAN}🔗 Quick Commands:${NC}"
-    echo -e "  ${YELLOW}Service logs:${NC} journalctl -u <service-name>"
-    echo -e "  ${YELLOW}System logs:${NC} tail -f /var/log/syslog"
-    echo -e "  ${YELLOW}Restart service:${NC} sudo systemctl restart <service-name>"
-    echo -e "  ${YELLOW}Full status:${NC} $0"
+    echo -e "${CYAN}🔗 Quick Commands:"
+    echo -e "  Service logs: journalctl -u <service-name>"
+    echo -e "  System logs: tail -f /var/log/syslog"
+    echo -e "  Restart service: sudo systemctl restart <service-name>"
+    echo -e "  Full status: $0"
     echo
 
     log "INFO" "Pi Gateway service status check completed"

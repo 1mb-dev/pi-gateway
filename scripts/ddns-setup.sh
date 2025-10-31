@@ -8,12 +8,12 @@
 set -eo pipefail
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly NC='\033[0m' # No Color
+
+
+
+
+
+
 
 # Configuration
 readonly SCRIPT_NAME="$(basename "$0")"
@@ -70,42 +70,42 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo -e "  $1"
     log "INFO" "$1"
 }
 
 debug() {
     if [[ "${VERBOSE_DRY_RUN:-false}" == "true" ]]; then
-        echo -e "  ${PURPLE}🔍${NC} $1"
+        echo -e "  $1"
         log "DEBUG" "$1"
     fi
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}       Pi Gateway - Dynamic DNS Setup         ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "       Pi Gateway - Dynamic DNS Setup         "
+    echo "================================================"
     echo
 }
 
 print_section() {
     echo
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
 # Execute command with dry-run support
@@ -115,9 +115,9 @@ execute_command() {
 
     if [[ "$DRY_RUN" == "true" ]]; then
         if [[ -n "$description" ]]; then
-            echo -e "  ${PURPLE}[DRY-RUN]${NC} $description"
+            echo -e "  [DRY-RUN] $description"
         fi
-        echo -e "  ${PURPLE}[DRY-RUN]${NC} $cmd"
+        echo -e "  [DRY-RUN] $cmd"
         debug "Command would execute: $cmd"
         return 0
     else
@@ -131,10 +131,10 @@ execute_command() {
 # Initialize dry-run environment
 init_dry_run_environment() {
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "${PURPLE}🧪 Pi Gateway Dry-Run Mode Enabled${NC}"
-        echo -e "${PURPLE}   → No actual system changes will be made${NC}"
-        echo -e "${PURPLE}   → All DDNS configuration will be simulated${NC}"
-        echo -e "${PURPLE}   → Log file: $LOG_FILE${NC}"
+        echo "Pi Gateway Dry-Run Mode Enabled"
+        echo "   → No actual system changes will be made"
+        echo "   → All DDNS configuration will be simulated"
+        echo "   → Log file: $LOG_FILE"
         echo
 
         # Initialize mock environment if available (from external mock files)
@@ -210,12 +210,12 @@ select_ddns_provider() {
     fi
 
     echo
-    echo -e "${BLUE}Available DDNS Providers:${NC}"
-    echo -e "  ${YELLOW}1.${NC} DuckDNS (Free, easy setup)"
-    echo -e "  ${YELLOW}2.${NC} No-IP (Free tier available)"
-    echo -e "  ${YELLOW}3.${NC} Cloudflare (Free with domain)"
-    echo -e "  ${YELLOW}4.${NC} FreeDNS (Free)"
-    echo -e "  ${YELLOW}5.${NC} Namecheap (Paid domain required)"
+    echo "Available DDNS Providers:"
+    echo -e "  1. DuckDNS (Free, easy setup)"
+    echo -e "  2. No-IP (Free tier available)"
+    echo -e "  3. Cloudflare (Free with domain)"
+    echo -e "  4. FreeDNS (Free)"
+    echo -e "  5. Namecheap (Paid domain required)"
     echo
 
     local choice
@@ -256,7 +256,7 @@ get_provider_credentials() {
     echo
     case $provider in
         "duckdns")
-            echo -e "${BLUE}DuckDNS Configuration:${NC}"
+            echo "DuckDNS Configuration:"
             echo -e "  1. Go to https://www.duckdns.org"
             echo -e "  2. Sign in and create a domain"
             echo -e "  3. Copy your token"
@@ -267,7 +267,7 @@ get_provider_credentials() {
             echo "$hostname $token"
             ;;
         "noip")
-            echo -e "${BLUE}No-IP Configuration:${NC}"
+            echo "No-IP Configuration:"
             echo -e "  1. Go to https://www.noip.com"
             echo -e "  2. Create an account and hostname"
             echo -e "  3. Use your account credentials"
@@ -280,7 +280,7 @@ get_provider_credentials() {
             echo "$username:$password $hostname"
             ;;
         "cloudflare")
-            echo -e "${BLUE}Cloudflare Configuration:${NC}"
+            echo "Cloudflare Configuration:"
             echo -e "  1. Go to https://dash.cloudflare.com"
             echo -e "  2. Get your API key from Profile > API Tokens"
             echo -e "  3. Use your domain managed by Cloudflare"
@@ -292,7 +292,7 @@ get_provider_credentials() {
             echo "$email $api_key $domain"
             ;;
         *)
-            echo -e "${BLUE}Generic Configuration:${NC}"
+            echo "Generic Configuration:"
             local hostname username password
             read -r -p "Enter hostname: " hostname
             read -r -p "Enter username: " username
@@ -656,39 +656,39 @@ display_ddns_info() {
     print_section "Dynamic DNS Information"
 
     echo
-    echo -e "${GREEN}🌐 Dynamic DNS Setup Complete!${NC}"
+    echo "🌐 Dynamic DNS Setup Complete!"
     echo
 
     if [[ "$DRY_RUN" == "false" ]]; then
         local current_ip
         current_ip=$(curl -s https://ipinfo.io/ip 2>/dev/null || echo "Unable to detect")
-        echo -e "${BLUE}Current Configuration:${NC}"
-        echo -e "  ${YELLOW}Public IP:${NC} $current_ip"
-        echo -e "  ${YELLOW}Update Interval:${NC} $DDNS_UPDATE_INTERVAL seconds"
-        echo -e "  ${YELLOW}Check Interval:${NC} $DDNS_CHECK_INTERVAL seconds"
+        echo "Current Configuration:"
+        echo -e "  Public IP: $current_ip"
+        echo -e "  Update Interval: $DDNS_UPDATE_INTERVAL seconds"
+        echo -e "  Check Interval: $DDNS_CHECK_INTERVAL seconds"
         echo
     fi
 
-    echo -e "${BLUE}Service Management:${NC}"
-    echo -e "  ${PURPLE}Status:${NC} sudo systemctl status ddclient"
-    echo -e "  ${PURPLE}Start:${NC} sudo systemctl start ddclient"
-    echo -e "  ${PURPLE}Stop:${NC} sudo systemctl stop ddclient"
-    echo -e "  ${PURPLE}Restart:${NC} sudo systemctl restart ddclient"
+    echo "Service Management:"
+    echo -e "  Status: sudo systemctl status ddclient"
+    echo -e "  Start: sudo systemctl start ddclient"
+    echo -e "  Stop: sudo systemctl stop ddclient"
+    echo -e "  Restart: sudo systemctl restart ddclient"
     echo
 
-    echo -e "${BLUE}Manual Operations:${NC}"
-    echo -e "  ${PURPLE}Force update:${NC} sudo ddclient -force"
-    echo -e "  ${PURPLE}Test update:${NC} sudo ddclient -daemon=0 -verbose"
-    echo -e "  ${PURPLE}Check status:${NC} sudo /usr/local/bin/ddns-monitor"
+    echo "Manual Operations:"
+    echo -e "  Force update: sudo ddclient -force"
+    echo -e "  Test update: sudo ddclient -daemon=0 -verbose"
+    echo -e "  Check status: sudo /usr/local/bin/ddns-monitor"
     echo
 
-    echo -e "${BLUE}Log Files:${NC}"
-    echo -e "  ${PURPLE}DDClient:${NC} $DDNS_LOG_FILE"
-    echo -e "  ${PURPLE}Monitoring:${NC} /var/log/ddns-monitor.log"
-    echo -e "  ${PURPLE}System:${NC} journalctl -u ddclient"
+    echo "Log Files:"
+    echo -e "  DDClient: $DDNS_LOG_FILE"
+    echo -e "  Monitoring: /var/log/ddns-monitor.log"
+    echo -e "  System: journalctl -u ddclient"
     echo
 
-    echo -e "${YELLOW}⚠️  Important Notes:${NC}"
+    echo "WARNING: Important Notes:"
     echo -e "  • DDNS updates your external IP address automatically"
     echo -e "  • Configure router port forwarding to use external access"
     echo -e "  • Monitor logs regularly for update failures"

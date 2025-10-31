@@ -30,36 +30,37 @@ log() {
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}      Pi Gateway - System Hardening          ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "      Pi Gateway - System Hardening          "
+    echo "================================================"
     echo
 }
 
 print_section() {
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
+# Override common.sh functions to add counter logic
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo "[OK] $1"
     log "SUCCESS: $1"
     ((HARDENING_APPLIED++))
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo "[ERROR] $1" >&2
     log "ERROR: $1"
     ((HARDENING_FAILED++))
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo "[WARNING] $1"
     log "WARNING: $1"
     ((WARNINGS++))
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo "[INFO] $1"
     log "INFO: $1"
 }
 

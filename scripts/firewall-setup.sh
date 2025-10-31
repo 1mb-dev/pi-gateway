@@ -7,12 +7,12 @@
 set -euo pipefail
 
 # Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly NC='\033[0m' # No Color
+
+
+
+
+
+
 
 # Configuration
 readonly SCRIPT_NAME="$(basename "$0")"
@@ -55,42 +55,42 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo -e "  $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo -e "  $1"
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo -e "  $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo -e "  $1"
     log "INFO" "$1"
 }
 
 debug() {
     if [[ "${VERBOSE_DRY_RUN:-false}" == "true" ]]; then
-        echo -e "  ${PURPLE}🔍${NC} $1"
+        echo -e "  $1"
         log "DEBUG" "$1"
     fi
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}       Pi Gateway - Firewall Setup            ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "       Pi Gateway - Firewall Setup            "
+    echo "================================================"
     echo
 }
 
 print_section() {
     echo
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
 # Execute command with dry-run support
@@ -100,9 +100,9 @@ execute_command() {
 
     if [[ "$DRY_RUN" == "true" ]]; then
         if [[ -n "$description" ]]; then
-            echo -e "  ${PURPLE}[DRY-RUN]${NC} $description"
+            echo -e "  [DRY-RUN] $description"
         fi
-        echo -e "  ${PURPLE}[DRY-RUN]${NC} $cmd"
+        echo -e "  [DRY-RUN] $cmd"
         debug "Command would execute: $cmd"
         return 0
     else
@@ -116,10 +116,10 @@ execute_command() {
 # Initialize dry-run environment
 init_dry_run_environment() {
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "${PURPLE}🧪 Pi Gateway Dry-Run Mode Enabled${NC}"
-        echo -e "${PURPLE}   → No actual firewall changes will be made${NC}"
-        echo -e "${PURPLE}   → All firewall rules will be simulated${NC}"
-        echo -e "${PURPLE}   → Log file: $LOG_FILE${NC}"
+        echo "Pi Gateway Dry-Run Mode Enabled"
+        echo "   → No actual firewall changes will be made"
+        echo "   → All firewall rules will be simulated"
+        echo "   → Log file: $LOG_FILE"
         echo
 
         # Initialize mock environment if available (from external mock files)
@@ -501,28 +501,28 @@ display_firewall_status() {
     print_section "Firewall Status and Rules"
 
     echo
-    echo -e "${GREEN}🔥 Firewall Setup Complete!${NC}"
+    echo "🔥 Firewall Setup Complete!"
     echo
 
     if [[ "$DRY_RUN" == "false" ]]; then
-        echo -e "${BLUE}UFW Status:${NC}"
+        echo "UFW Status:"
         ufw status verbose || echo "  UFW status not available"
         echo
 
-        echo -e "${BLUE}Fail2ban Status:${NC}"
+        echo "Fail2ban Status:"
         fail2ban-client status 2>/dev/null || echo "  Fail2ban status not available"
         echo
     fi
 
-    echo -e "${BLUE}Firewall Configuration Summary:${NC}"
-    echo -e "  ${YELLOW}SSH Port:${NC} $SSH_PORT (with rate limiting)"
-    echo -e "  ${YELLOW}VPN Port:${NC} $WIREGUARD_PORT (WireGuard)"
-    echo -e "  ${YELLOW}Remote Desktop:${NC} Restricted to VPN and local network"
-    echo -e "  ${YELLOW}Web Services:${NC} Outbound allowed, inbound restricted"
-    echo -e "  ${YELLOW}Intrusion Detection:${NC} Fail2ban active"
+    echo "Firewall Configuration Summary:"
+    echo -e "  SSH Port: $SSH_PORT (with rate limiting)"
+    echo -e "  VPN Port: $WIREGUARD_PORT (WireGuard)"
+    echo -e "  Remote Desktop: Restricted to VPN and local network"
+    echo -e "  Web Services: Outbound allowed, inbound restricted"
+    echo -e "  Intrusion Detection: Fail2ban active"
     echo
 
-    echo -e "${BLUE}Security Features Enabled:${NC}"
+    echo "Security Features Enabled:"
     echo -e "  • SSH brute force protection"
     echo -e "  • VPN connection monitoring"
     echo -e "  • Invalid packet blocking"
@@ -531,15 +531,15 @@ display_firewall_status() {
     echo -e "  • Connection logging"
     echo
 
-    echo -e "${BLUE}Management Commands:${NC}"
-    echo -e "  ${PURPLE}Check status:${NC} sudo ufw status verbose"
-    echo -e "  ${PURPLE}Add rule:${NC} sudo ufw allow <port>"
-    echo -e "  ${PURPLE}Remove rule:${NC} sudo ufw delete <rule>"
-    echo -e "  ${PURPLE}Fail2ban status:${NC} sudo fail2ban-client status"
-    echo -e "  ${PURPLE}Check banned IPs:${NC} sudo fail2ban-client status sshd"
+    echo "Management Commands:"
+    echo -e "  Check status: sudo ufw status verbose"
+    echo -e "  Add rule: sudo ufw allow <port>"
+    echo -e "  Remove rule: sudo ufw delete <rule>"
+    echo -e "  Fail2ban status: sudo fail2ban-client status"
+    echo -e "  Check banned IPs: sudo fail2ban-client status sshd"
     echo
 
-    echo -e "${YELLOW}⚠️  Important Security Notes:${NC}"
+    echo "WARNING: Important Security Notes:"
     echo -e "  • Firewall is configured for Pi Gateway services"
     echo -e "  • SSH is protected with rate limiting and fail2ban"
     echo -e "  • Remote access is restricted to VPN and local network"

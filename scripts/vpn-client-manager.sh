@@ -7,12 +7,12 @@
 set -euo pipefail
 
 # Colors
-readonly GREEN='\033[0;32m'
-readonly RED='\033[0;31m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
+
+
+
+
 readonly CYAN='\033[0;36m'
-readonly NC='\033[0m'
+
 
 # Configuration
 readonly WG_CONFIG_DIR="/etc/wireguard"
@@ -21,10 +21,10 @@ readonly SERVER_CONFIG="$WG_CONFIG_DIR/wg0.conf"
 readonly VPN_NETWORK="10.13.13.0/24"
 
 # Logging functions
-success() { echo -e "  ${GREEN}✓${NC} $1"; }
-error() { echo -e "  ${RED}✗${NC} $1"; }
-warning() { echo -e "  ${YELLOW}⚠${NC} $1"; }
-info() { echo -e "  ${BLUE}ℹ${NC} $1"; }
+success() { echo -e "  $1"; }
+error() { echo -e "  $1"; }
+warning() { echo -e "  $1"; }
+info() { echo -e "  $1"; }
 
 # Check requirements
 check_requirements() {
@@ -201,7 +201,7 @@ remove_client() {
 
 # List VPN clients
 list_clients() {
-    echo -e "${CYAN}📋 VPN Client Status${NC}"
+    echo -e "${CYAN}📋 VPN Client Status"
     echo
 
     if [[ ! -d "$CLIENT_CONFIG_DIR" ]] || [[ -z "$(ls -A "$CLIENT_CONFIG_DIR"/*.conf 2>/dev/null || true)" ]]; then
@@ -209,7 +209,7 @@ list_clients() {
         return
     fi
 
-    echo -e "${BLUE}Configured Clients:${NC}"
+    echo "Configured Clients:"
     for config in "$CLIENT_CONFIG_DIR"/*.conf; do
         if [[ -f "$config" ]]; then
             local client_name
@@ -223,7 +223,7 @@ list_clients() {
 
     # Show active connections if WireGuard is running
     if command -v wg >/dev/null 2>&1 && wg show wg0 >/dev/null 2>&1; then
-        echo -e "${BLUE}Active Connections:${NC}"
+        echo "Active Connections:"
         local peer_count
         peer_count=$(wg show wg0 peers | wc -l)
         info "Connected peers: $peer_count"
@@ -247,14 +247,14 @@ show_client() {
         return 1
     fi
 
-    echo -e "${CYAN}📄 Client Configuration: $client_name${NC}"
+    echo -e "${CYAN}📄 Client Configuration: $client_name"
     echo
     cat "$client_config"
     echo
 
     # Generate QR code if available
     if command -v qrencode >/dev/null 2>&1; then
-        echo -e "${BLUE}QR Code:${NC}"
+        echo "QR Code:"
         qrencode -t ansiutf8 < "$client_config"
     fi
 }

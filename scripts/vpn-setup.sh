@@ -6,14 +6,6 @@
 
 set -euo pipefail
 
-# Colors for output
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly NC='\033[0m' # No Color
-
 # Configuration
 readonly SCRIPT_NAME="$(basename "$0")"
 readonly TIMESTAMP="$(date '+%Y-%m-%d %H:%M:%S')"
@@ -54,42 +46,42 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo "[OK] $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1"
+    echo "[ERROR] $1" >&2
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo "[WARNING] $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo "[INFO] $1"
     log "INFO" "$1"
 }
 
 debug() {
     if [[ "${VERBOSE_DRY_RUN:-false}" == "true" ]]; then
-        echo -e "  ${PURPLE}🔍${NC} $1"
+        echo "[DEBUG] $1"
         log "DEBUG" "$1"
     fi
 }
 
 print_header() {
-    echo -e "${BLUE}================================================${NC}"
-    echo -e "${BLUE}       Pi Gateway - WireGuard VPN Setup       ${NC}"
-    echo -e "${BLUE}================================================${NC}"
+    echo "================================================"
+    echo "       Pi Gateway - WireGuard VPN Setup       "
+    echo "================================================"
     echo
 }
 
 print_section() {
     echo
-    echo -e "${BLUE}--- $1 ---${NC}"
+    echo "--- $1 ---"
 }
 
 # Execute command with dry-run support
@@ -99,9 +91,9 @@ execute_command() {
 
     if [[ "$DRY_RUN" == "true" ]]; then
         if [[ -n "$description" ]]; then
-            echo -e "  ${PURPLE}[DRY-RUN]${NC} $description"
+            echo -e "  [DRY-RUN] $description"
         fi
-        echo -e "  ${PURPLE}[DRY-RUN]${NC} $cmd"
+        echo -e "  [DRY-RUN] $cmd"
         debug "Command would execute: $cmd"
         return 0
     else
@@ -115,10 +107,10 @@ execute_command() {
 # Initialize dry-run environment
 init_dry_run_environment() {
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "${PURPLE}🧪 Pi Gateway Dry-Run Mode Enabled${NC}"
-        echo -e "${PURPLE}   → No actual system changes will be made${NC}"
-        echo -e "${PURPLE}   → All WireGuard configuration will be simulated${NC}"
-        echo -e "${PURPLE}   → Log file: $LOG_FILE${NC}"
+        echo "Pi Gateway Dry-Run Mode Enabled"
+        echo "   → No actual system changes will be made"
+        echo "   → All WireGuard configuration will be simulated"
+        echo "   → Log file: $LOG_FILE"
         echo
 
         # Initialize mock environment if available (from external mock files)
@@ -520,26 +512,26 @@ display_connection_info() {
     print_section "WireGuard VPN Information"
 
     echo
-    echo -e "${GREEN}🔐 WireGuard VPN Setup Complete!${NC}"
+    echo "WireGuard VPN Setup Complete!"
     echo
-    echo -e "${BLUE}VPN Server Details:${NC}"
-    echo -e "  ${YELLOW}Interface:${NC} $WG_INTERFACE"
-    echo -e "  ${YELLOW}Port:${NC} $DEFAULT_WG_PORT"
-    echo -e "  ${YELLOW}Network:${NC} $VPN_NETWORK"
-    echo -e "  ${YELLOW}Server IP:${NC} $VPN_SERVER_IP"
+    echo "VPN Server Details:"
+    echo -e "  Interface: $WG_INTERFACE"
+    echo -e "  Port: $DEFAULT_WG_PORT"
+    echo -e "  Network: $VPN_NETWORK"
+    echo -e "  Server IP: $VPN_SERVER_IP"
     echo
-    echo -e "${BLUE}Client Management:${NC}"
-    echo -e "  ${PURPLE}Add client:${NC} wg-add-client <name> [ip]"
-    echo -e "  ${PURPLE}Remove client:${NC} wg-remove-client <name>"
-    echo -e "  ${PURPLE}List clients:${NC} wg-list-clients"
+    echo "Client Management:"
+    echo -e "  Add client: wg-add-client <name> [ip]"
+    echo -e "  Remove client: wg-remove-client <name>"
+    echo -e "  List clients: wg-list-clients"
     echo
-    echo -e "${BLUE}Service Management:${NC}"
-    echo -e "  ${PURPLE}Start VPN:${NC} sudo systemctl start wg-quick@$WG_INTERFACE"
-    echo -e "  ${PURPLE}Stop VPN:${NC} sudo systemctl stop wg-quick@$WG_INTERFACE"
-    echo -e "  ${PURPLE}Status:${NC} sudo systemctl status wg-quick@$WG_INTERFACE"
-    echo -e "  ${PURPLE}Show connections:${NC} sudo wg show"
+    echo "Service Management:"
+    echo -e "  Start VPN: sudo systemctl start wg-quick@$WG_INTERFACE"
+    echo -e "  Stop VPN: sudo systemctl stop wg-quick@$WG_INTERFACE"
+    echo -e "  Status: sudo systemctl status wg-quick@$WG_INTERFACE"
+    echo -e "  Show connections: sudo wg show"
     echo
-    echo -e "${YELLOW}⚠️  Important Setup Notes:${NC}"
+    echo "WARNING: Important Setup Notes:"
     echo -e "  • Configure your router to forward port $DEFAULT_WG_PORT to this Pi"
     echo -e "  • Update your Dynamic DNS if using external access"
     echo -e "  • Add clients using: wg-add-client laptop"
@@ -552,9 +544,9 @@ display_connection_info() {
         local server_ip
         server_ip=$(echo "$network_info" | awk '{print $2}')
 
-        echo -e "${BLUE}Next Steps:${NC}"
-        echo -e "  1. Add your first client: ${PURPLE}wg-add-client phone${NC}"
-        echo -e "  2. Configure router port forwarding: ${PURPLE}$DEFAULT_WG_PORT → $server_ip${NC}"
+        echo "Next Steps:"
+        echo -e "  1. Add your first client: wg-add-client phone"
+        echo -e "  2. Configure router port forwarding: $DEFAULT_WG_PORT → $server_ip"
         echo -e "  3. Test VPN connection from external network"
         echo
     fi
