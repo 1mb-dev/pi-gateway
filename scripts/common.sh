@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # Pi Gateway - Common Utilities
-# Shared functions and constants for all Pi Gateway scripts
+# Shared functions and constants
 #
 
 # Ensure this file is sourced only once
@@ -11,19 +11,8 @@ fi
 readonly PI_GATEWAY_COMMON_LOADED=1
 
 # Script information
-readonly PI_GATEWAY_VERSION="1.1.0"
+readonly PI_GATEWAY_VERSION="1.2.0"
 readonly PI_GATEWAY_ROOT="${PI_GATEWAY_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
-
-# Colors
-readonly RED='\033[0;31m'
-readonly GREEN='\033[0;32m'
-readonly YELLOW='\033[1;33m'
-readonly BLUE='\033[0;34m'
-readonly PURPLE='\033[0;35m'
-readonly CYAN='\033[0;36m'
-readonly WHITE='\033[1;37m'
-readonly GRAY='\033[0;37m'
-readonly NC='\033[0m'
 
 # Common paths
 readonly PI_GATEWAY_LOG_DIR="/var/log/pi-gateway"
@@ -47,19 +36,16 @@ init_logging() {
     local script_name="${1:-$(basename "$0")}"
     local log_file="${2:-/tmp/pi-gateway-${script_name%%.sh}.log}"
 
-    # Export for use in other functions
     export PI_GATEWAY_LOG_FILE="$log_file"
 
-    # Create log directory if needed
     local log_dir
     log_dir="$(dirname "$log_file")"
     [[ -d "$log_dir" ]] || mkdir -p "$log_dir"
 
-    # Initialize log file
     echo "$(date '+%Y-%m-%d %H:%M:%S') - Starting $script_name" > "$log_file"
 }
 
-# Logging functions
+# Logging functions - plain text only
 log() {
     local level="${1:-INFO}"
     shift
@@ -67,34 +53,34 @@ log() {
 }
 
 success() {
-    echo -e "  ${GREEN}✓${NC} $1"
+    echo "[OK] $1"
     log "SUCCESS" "$1"
 }
 
 error() {
-    echo -e "  ${RED}✗${NC} $1" >&2
+    echo "[ERROR] $1" >&2
     log "ERROR" "$1"
 }
 
 warning() {
-    echo -e "  ${YELLOW}⚠${NC} $1"
+    echo "[WARNING] $1"
     log "WARN" "$1"
 }
 
 info() {
-    echo -e "  ${BLUE}ℹ${NC} $1"
+    echo "[INFO] $1"
     log "INFO" "$1"
 }
 
 debug() {
     if [[ "${VERBOSE_DRY_RUN:-false}" == "true" ]]; then
-        echo -e "  ${PURPLE}🔍${NC} $1"
+        echo "[DEBUG] $1"
         log "DEBUG" "$1"
     fi
 }
 
 progress() {
-    echo -e "  ${CYAN}⚡${NC} $1"
+    echo "[PROGRESS] $1"
     log "PROGRESS" "$1"
 }
 
@@ -105,7 +91,6 @@ is_dry_run() {
 
 is_mocked() {
     local component="${1:-}"
-    # Check global mock modes
     [[ "${MOCK_MODE:-false}" == "true" ]] || [[ "${PI_GATEWAY_TESTING:-false}" == "true" ]]
 }
 
@@ -114,7 +99,7 @@ execute_command() {
     local cmd="$*"
 
     if [[ "$DRY_RUN" == "true" ]]; then
-        echo -e "  ${CYAN}[DRY-RUN]${NC} $cmd"
+        echo "[DRY-RUN] $cmd"
         log "DRY-RUN" "$cmd"
         return 0
     else
@@ -196,7 +181,7 @@ cleanup_on_exit() {
     if [[ $exit_code -ne 0 ]]; then
         error "Script failed with exit code $exit_code"
         if [[ -n "${PI_GATEWAY_LOG_FILE:-}" ]]; then
-            echo -e "\n${YELLOW}Check log file: ${PI_GATEWAY_LOG_FILE}${NC}"
+            echo "Check log file: ${PI_GATEWAY_LOG_FILE}"
         fi
     fi
 }

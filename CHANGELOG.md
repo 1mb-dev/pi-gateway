@@ -5,6 +5,59 @@ All notable changes to Pi Gateway will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-10-31
+
+### BREAKING CHANGES
+
+**Major Simplification Release** - Pi Gateway refocused on core mission: secure remote access gateway.
+
+#### Removed from Core
+- Container orchestration (moved to `extensions/containers/`)
+- Web status dashboard (moved to `extensions/dashboard/`)
+- Cloud backup integration (moved to `extensions/backup/`)
+- Network optimizer (moved to `extensions/network/`)
+- Auto-maintenance system (moved to `extensions/maintenance/`)
+- Monitoring system (moved to `extensions/monitoring/`)
+
+#### UI Changes
+- Removed all emojis and colors from output (plain text only)
+- Removed progress bars and ASCII art
+- Simplified setup menu (3 choices instead of complex nested menus)
+- Reduced setup.sh from 748 to 352 lines (53% reduction)
+
+#### Core Focus
+Pi Gateway now focuses exclusively on:
+- SSH hardening and secure access
+- WireGuard VPN server setup
+- Firewall configuration
+- System security hardening
+- Optional: Remote desktop (VNC) and Dynamic DNS
+
+### Added
+- Extensions system for optional advanced features
+- Plain text output for better scriptability
+- Simplified setup experience
+- Extensions documentation
+
+### Changed
+- Refocused project scope on secure remote access
+- Moved advanced features to optional extensions
+- Simplified common.sh (removed colors, emojis)
+- Updated README to reflect new mission
+
+### Fixed
+- Version inconsistency between VERSION file and common.sh
+
+### Migration Guide
+
+**If you used advanced features:**
+1. Advanced features still available in `extensions/` directory
+2. Run extension scripts manually: `sudo extensions/containers/container-support.sh`
+3. Extensions are standalone and optional
+
+**Core users (SSH + VPN only):**
+- No changes needed, setup process is simpler and faster
+
 ## [1.2.0] - 2025-09-21
 
 ### Added

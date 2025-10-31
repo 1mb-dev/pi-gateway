@@ -1,17 +1,15 @@
-# Pi Gateway - Homelab Bootstrap
+# Pi Gateway
 
 [![CI Status](https://github.com/vnykmshr/pi-gateway/workflows/Pi%20Gateway%20CI/badge.svg)](https://github.com/vnykmshr/pi-gateway/actions)
 [![Release](https://img.shields.io/github/v/release/vnykmshr/pi-gateway)](https://github.com/vnykmshr/pi-gateway/releases)
 [![License](https://img.shields.io/github/license/vnykmshr/pi-gateway)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-40%20tests%20|%20100%25%20pass-green)](https://github.com/vnykmshr/pi-gateway/actions)
-[![Version](https://img.shields.io/badge/version-1.2.0-blue)](https://github.com/vnykmshr/pi-gateway/releases)
-[![Production Ready](https://img.shields.io/badge/production-ready-brightgreen)](docs/deployment-guide.md)
 
-**Complete Raspberry Pi homelab bootstrap system with automated security hardening, VPN setup, and comprehensive testing infrastructure.**
+**Secure remote access gateway for Raspberry Pi. SSH + VPN setup in under 10 minutes.**
 
 ## Overview
 
-Pi Gateway provides a one-script automated setup for core services while supporting dynamic IP environments. All provisioning is tracked in this repository, following Infrastructure as Code (IaC) principles for reliability, reproducibility, and extensibility.
+Pi Gateway transforms your Raspberry Pi into a secure remote access gateway with hardened SSH, WireGuard VPN, and firewall protection. Simple, focused, and production-ready.
 
 ## Quick Start
 
@@ -38,33 +36,23 @@ make setup
 curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
 ```
 
-## ✨ Features
+## Features
 
-### 🔐 **Security & Hardening**
-- **SSH Hardening**: Key-based authentication, fail2ban, custom ports
-- **System Hardening**: Kernel parameters, network security, service management
-- **Firewall Configuration**: UFW setup with secure defaults
-- **User Account Security**: Service accounts, permission hardening
+**Core Security:**
+- SSH hardening with key-based authentication and fail2ban
+- WireGuard VPN server with client management
+- Firewall configuration (UFW) with secure defaults
+- System security hardening
 
-### 🌐 **VPN & Remote Access**
-- **WireGuard VPN Server**: Automated setup with client management
-- **Dynamic DNS**: Cloudflare integration for remote access
-- **Remote Desktop**: VNC server configuration
-- **Port Management**: Automated port forwarding setup
+**Optional Components:**
+- Remote desktop access (VNC)
+- Dynamic DNS integration
+- Custom port configuration
 
-### 🧪 **Development & Testing**
-- **Production Validated**: ✅ Comprehensive E2E testing completed
-- **QEMU Pi Emulation**: Full hardware emulation testing environment
-- **Virtual Sandbox**: Complete dry-run environment with hardware mocking
-- **Docker-based Pi Simulation**: Realistic Raspberry Pi OS environment testing
-- **40 Unit Tests**: 100% pass rate with comprehensive validation
-- **Security Verified**: Complete security hardening validation
-- **All Components Tested**: SSH, VPN, firewall, monitoring all validated
-
-### 🏠 **Homelab Ready**
-- **Service Discovery**: mDNS and local network integration
-- **Monitoring Setup**: System health monitoring
-- **Extension Support**: Plugin architecture for custom services
+**Quality:**
+- 40 unit tests with 100% pass rate
+- Dry-run mode for safe testing
+- Docker and QEMU-based integration testing
 
 ## Requirements
 
@@ -79,13 +67,24 @@ curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/qui
 - Dynamic DNS provider account (DuckDNS, No-IP, etc.)
 - SSH client for initial access
 
-## Core Services
+## Core Components
 
-- **System Hardening**: Security best practices for internet-connected devices
-- **SSH Access**: Key-based authentication, password login disabled
-- **WireGuard VPN**: High-performance encrypted remote connectivity
-- **Remote Desktop**: GUI access via VNC or xRDP
-- **Dynamic DNS**: Reliable hostname for changing IPs
+- System hardening and security best practices
+- SSH with key-based authentication
+- WireGuard VPN for encrypted remote access
+- Firewall protection (UFW + fail2ban)
+
+## Extensions
+
+Advanced features moved to `extensions/` directory:
+- Container orchestration (Docker/Podman)
+- Web status dashboard
+- Cloud backup integration
+- Network optimization
+- Automated maintenance
+- System monitoring
+
+See `extensions/README.md` for installation instructions.
 
 ## Documentation
 
