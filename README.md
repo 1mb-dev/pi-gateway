@@ -100,7 +100,8 @@ See `extensions/README.md` for installation instructions.
 ### Advanced Topics
 - [Extension Development](docs/extensions.md) - Creating custom extensions
 - [Security Best Practices](docs/security.md) - Security hardening and compliance
-- [Release Notes](RELEASE_NOTES.md) - Version history and features
+- [Technical Architecture](docs/TECHNICAL_BLOG.md) - In-depth technical blog post
+- [Release Notes](docs/RELEASE_NOTES.md) - Version history and features
 
 ## Project Structure
 
