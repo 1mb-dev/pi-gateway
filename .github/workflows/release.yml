@@ -93,7 +93,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download release assets
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: release-assets
           path: release/
