@@ -159,7 +159,7 @@ Pi Gateway v1.1.0 has successfully passed comprehensive end-to-end testing and i
 - The system has been validated in realistic test environments
 
 ### Recommended Deployment Process:
-1. **Download**: `curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash`
+1. **Download**: `curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash`
 2. **Validate**: Run pre-flight checks automatically
 3. **Deploy**: Follow interactive setup prompts
 4. **Verify**: Automatic post-installation validation
@@ -172,7 +172,7 @@ Pi Gateway v1.1.0 has successfully passed comprehensive end-to-end testing and i
 - **📚 Setup Guide**: [docs/setup-guide.md](../docs/setup-guide.md)
 - **🔧 Troubleshooting**: [docs/troubleshooting.md](../docs/troubleshooting.md)
 - **🔒 Security Guide**: [docs/security.md](../docs/security.md)
-- **🌐 GitHub Issues**: [github.com/vnykmshr/pi-gateway/issues](https://github.com/vnykmshr/pi-gateway/issues)
+- **🌐 GitHub Issues**: [github.com/1mb-dev/pi-gateway/issues](https://github.com/1mb-dev/pi-gateway/issues)
 
 ---
 

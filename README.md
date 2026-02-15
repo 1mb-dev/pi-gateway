@@ -1,9 +1,9 @@
 # Pi Gateway
 
-[![CI Status](https://github.com/vnykmshr/pi-gateway/workflows/Pi%20Gateway%20CI/badge.svg)](https://github.com/vnykmshr/pi-gateway/actions)
-[![Release](https://img.shields.io/github/v/release/vnykmshr/pi-gateway)](https://github.com/vnykmshr/pi-gateway/releases)
-[![License](https://img.shields.io/github/license/vnykmshr/pi-gateway)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-40%20tests%20|%20100%25%20pass-green)](https://github.com/vnykmshr/pi-gateway/actions)
+[![CI Status](https://github.com/1mb-dev/pi-gateway/workflows/Pi%20Gateway%20CI/badge.svg)](https://github.com/1mb-dev/pi-gateway/actions)
+[![Release](https://img.shields.io/github/v/release/1mb-dev/pi-gateway)](https://github.com/1mb-dev/pi-gateway/releases)
+[![License](https://img.shields.io/github/license/1mb-dev/pi-gateway)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-40%20tests%20|%20100%25%20pass-green)](https://github.com/1mb-dev/pi-gateway/actions)
 
 **Secure remote access gateway for Raspberry Pi. SSH + VPN setup in under 10 minutes.**
 
@@ -15,13 +15,13 @@ Pi Gateway transforms your Raspberry Pi into a secure remote access gateway with
 
 ### One-Command Installation (Recommended)
 ```bash
-curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash
+curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash
 ```
 
 ### Manual Installation
 ```bash
 # Clone the repository
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 
 # Check system requirements
@@ -33,7 +33,7 @@ make setup
 
 ### Interactive Setup
 ```bash
-curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
+curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
 ```
 
 ## Features
@@ -194,4 +194,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Support
 
-For issues and feature requests, please visit the [GitHub Issues](https://github.com/vnykmshr/pi-gateway/issues) page.
+For issues and feature requests, please visit the [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues) page.

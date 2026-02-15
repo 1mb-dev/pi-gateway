@@ -735,7 +735,7 @@ If you can't resolve an issue:
 
 1. **Gather Information**: Run diagnostic commands above
 2. **Check Logs**: Look for error messages in relevant logs
-3. **Search Issues**: Check [GitHub Issues](https://github.com/vnykmshr/pi-gateway/issues)
+3. **Search Issues**: Check [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues)
 4. **Create Issue**: Provide system info, logs, and steps to reproduce
 
 **Previous**: [Usage Guide](usage.md) | **Back**: [README](../README.md)

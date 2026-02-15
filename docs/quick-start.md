@@ -105,7 +105,7 @@ ssh pi@YOUR_PI_IP
 
 ```bash
 # Run on your Pi via SSH
-curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash
+curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash
 ```
 
 ### Option 2: Manual Installation (More Control)
@@ -117,7 +117,7 @@ curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/qui
 ssh pi@YOUR_PI_IP
 
 # 2. Clone the repository
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 
 # 3. Run pre-flight checks (recommended)
@@ -136,7 +136,7 @@ sudo ./setup.sh --non-interactive
 
 ```bash
 # Run with interactive prompts and explanations
-curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
+curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
 ```
 
 ---
@@ -368,8 +368,8 @@ sudo ./scripts/container-manager.sh install jellyfin    # Media server
 - [Usage Guide](usage.md) - How to use installed services
 
 ### 🐛 **Support**
-- [GitHub Issues](https://github.com/vnykmshr/pi-gateway/issues) - Bug reports and feature requests
-- [Discussions](https://github.com/vnykmshr/pi-gateway/discussions) - Community help and questions
+- [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues) - Bug reports and feature requests
+- [Discussions](https://github.com/1mb-dev/pi-gateway/discussions) - Community help and questions
 
 ### 🛠️ **Advanced Topics**
 - [Extension Development](extensions.md) - Creating custom services

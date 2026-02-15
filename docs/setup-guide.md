@@ -112,7 +112,7 @@ sudo raspi-config
 
 ```bash
 # Clone the Pi Gateway repository
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 
 # Make scripts executable (if needed)
@@ -377,7 +377,7 @@ After successful installation:
 - **Status Check**: `./scripts/service-status.sh`
 - **Logs**: `make logs`
 - **Troubleshooting**: See [troubleshooting.md](troubleshooting.md)
-- **Issues**: [GitHub Issues](https://github.com/vnykmshr/pi-gateway/issues)
+- **Issues**: [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues)
 
 ---
 

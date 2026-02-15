@@ -7,7 +7,7 @@
 set -euo pipefail
 
 # Configuration
-readonly REPO_URL="https://github.com/vnykmshr/pi-gateway.git"
+readonly REPO_URL="https://github.com/1mb-dev/pi-gateway.git"
 readonly INSTALL_DIR="$HOME/pi-gateway"
 
 # Colors
@@ -26,7 +26,7 @@ info() { echo -e "  $1"; }
 # Error handling
 cleanup() {
     local exit_code=$?
-    [[ $exit_code -ne 0 ]] && error "Installation failed! For help: https://github.com/vnykmshr/pi-gateway/issues"
+    [[ $exit_code -ne 0 ]] && error "Installation failed! For help: https://github.com/1mb-dev/pi-gateway/issues"
     exit $exit_code
 }
 trap cleanup EXIT

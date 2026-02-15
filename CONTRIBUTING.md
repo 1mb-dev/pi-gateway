@@ -6,7 +6,7 @@ Thank you for your interest in contributing to Pi Gateway! This document provide
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/vnykmshr/pi-gateway.git
+   git clone https://github.com/1mb-dev/pi-gateway.git
    cd pi-gateway
    ```
 

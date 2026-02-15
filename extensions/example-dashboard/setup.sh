@@ -501,7 +501,7 @@ create_systemd_service() {
     cat > "/etc/systemd/system/$SERVICE_NAME.service" << EOF
 [Unit]
 Description=Pi Gateway Dashboard
-Documentation=https://github.com/vnykmshr/pi-gateway
+Documentation=https://github.com/1mb-dev/pi-gateway
 After=network.target
 Wants=network.target
 

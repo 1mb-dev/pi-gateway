@@ -160,17 +160,17 @@ Pi Gateway v1.0.0 marks the completion of a comprehensive Raspberry Pi homelab b
 
 #### Quick Install (Recommended)
 ```bash
-curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash
+curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash
 ```
 
 #### Interactive Setup
 ```bash
-curl -sSL https://raw.githubusercontent.com/vnykmshr/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
+curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quick-install.sh | bash -s -- --interactive
 ```
 
 #### Manual Installation
 ```bash
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 make setup
 ```
@@ -315,7 +315,7 @@ We welcome contributions! See our [Contributing Guidelines](CONTRIBUTING.md) for
 
 #### Development Setup
 ```bash
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 make dev-setup
 make test
@@ -330,9 +330,9 @@ make test
 
 ### 📞 **Support**
 
-- **Issues**: [GitHub Issues](https://github.com/vnykmshr/pi-gateway/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/vnykmshr/pi-gateway/discussions)
-- **Documentation**: [Project Wiki](https://github.com/vnykmshr/pi-gateway/wiki)
+- **Issues**: [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/1mb-dev/pi-gateway/discussions)
+- **Documentation**: [Project Wiki](https://github.com/1mb-dev/pi-gateway/wiki)
 - **Security**: security@pi-gateway.local (for security issues)
 
 ### 🙏 **Acknowledgments**

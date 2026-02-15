@@ -146,7 +146,7 @@ sudo tail -f /var/log/pi-gateway-dashboard.log | grep auth
 
 ```bash
 # Clone and setup
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway/extensions/example-dashboard
 
 # Install dependencies

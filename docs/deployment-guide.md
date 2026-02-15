@@ -84,7 +84,7 @@ sudo raspi-config
 
 ```bash
 # Clone the repository
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 
 # Check system requirements
@@ -418,7 +418,7 @@ crontab -e
 # 2. Clone Pi Gateway repository
 # 3. Restore from backup
 
-git clone https://github.com/vnykmshr/pi-gateway.git
+git clone https://github.com/1mb-dev/pi-gateway.git
 cd pi-gateway
 ./scripts/backup-config.sh restore emergency-backup
 ./scripts/auto-maintenance.sh verify
@@ -610,9 +610,9 @@ sudo ufw --force reset
 
 ## Support and Resources
 
-- **Documentation**: [Pi Gateway Wiki](https://github.com/vnykmshr/pi-gateway/wiki)
-- **Issues**: [GitHub Issues](https://github.com/vnykmshr/pi-gateway/issues)
-- **Community**: [Discussion Forum](https://github.com/vnykmshr/pi-gateway/discussions)
+- **Documentation**: [Pi Gateway Wiki](https://github.com/1mb-dev/pi-gateway/wiki)
+- **Issues**: [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues)
+- **Community**: [Discussion Forum](https://github.com/1mb-dev/pi-gateway/discussions)
 - **Updates**: Watch the repository for release notifications
 
 ---

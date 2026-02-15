@@ -410,7 +410,7 @@ The entire system runs on $50 of hardware and installs in 10 minutes, yet provid
 
 For teams building similar infrastructure automation, the patterns here apply broadly: modular design, comprehensive testing, dry-run modes, and security-first defaults. The specific tools matter less than the architectural principles.
 
-Pi Gateway is available at https://github.com/vnykmshr/pi-gateway under the MIT license. The codebase demonstrates that secure systems don't require complexity - they require careful design and thorough execution.
+Pi Gateway is available at https://github.com/1mb-dev/pi-gateway under the MIT license. The codebase demonstrates that secure systems don't require complexity - they require careful design and thorough execution.
 
 ---
 
