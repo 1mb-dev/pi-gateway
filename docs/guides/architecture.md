@@ -1,3 +1,9 @@
+---
+title: Architecture Overview
+nav_order: 1
+parent: Guides
+---
+
 # Technical Architecture Review: Pi Gateway Homelab Bootstrap System
 
 ## Executive Summary

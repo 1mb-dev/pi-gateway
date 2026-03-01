@@ -1,0 +1,75 @@
+# Jekyll configuration for Just the Docs theme
+# Pi Gateway Documentation Site
+
+theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
+
+# Site metadata
+title: Pi Gateway
+description: Secure remote access gateway for Raspberry Pi
+url: https://1mb-dev.github.io/pi-gateway
+baseurl: /pi-gateway
+
+# Theme configuration
+color_scheme: auto
+search_enabled: true
+heading_anchors: true
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# Navigation
+nav_sort: case_sensitive
+footer_content: "Copyright &copy; 2026 Pi Gateway. Licensed under MIT."
+
+# Aux links
+aux_links:
+  GitHub Repository: https://github.com/1mb-dev/pi-gateway
+  Report Issue: https://github.com/1mb-dev/pi-gateway/issues
+  GitHub Discussions: https://github.com/1mb-dev/pi-gateway/discussions
+
+# Site search
+search:
+  # Split pages into sections that can be searched individually
+  # Supports 1 - 6, default: 2
+  heading_level: 2
+
+# Markdown processing
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-include-cache
+
+# Exclude files from Jekyll's processing
+exclude:
+  - .git
+  - .github
+  - .gitignore
+  - node_modules
+  - docker-compose.yml
+  - Makefile
+  - setup.sh
+  - scripts/
+  - tests/
+  - extensions/
+  - config/
+  - assets/
+  - todos/
+  - CHANGELOG.md
+  - LICENSE
+
+# Include necessary files
+include:
+  - .nojekyll

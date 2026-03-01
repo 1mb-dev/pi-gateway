@@ -1,3 +1,9 @@
+---
+title: Technical Blog
+nav_order: 2
+parent: Reference
+---
+
 # Building a Secure Remote Access Gateway for Raspberry Pi: Architecture and Design Lessons
 
 ## Introduction

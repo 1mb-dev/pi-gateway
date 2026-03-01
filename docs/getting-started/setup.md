@@ -1,13 +1,30 @@
-# Pi Gateway Setup Guide
+---
+title: Manual Setup
+nav_order: 2
+parent: Getting Started
+---
 
-Complete installation and configuration guide for Pi Gateway homelab bootstrap system.
+# Manual Setup Guide
 
-## Table of Contents
+Detailed step-by-step installation of Pi Gateway for users who prefer manual control.
 
-1. [Prerequisites](#prerequisites)
-2. [Hardware Setup](#hardware-setup)
-3. [Initial Pi Configuration](#initial-pi-configuration)
-4. [Installing Pi Gateway](#installing-pi-gateway)
+## Prerequisites
+
+Before starting, verify you have:
+- Raspberry Pi 4 or newer with fresh Raspberry Pi OS
+- 32GB+ MicroSD card
+- SSH client installed on your local machine
+- Network connection to your Pi (Ethernet recommended)
+- Administrator access to your home router
+
+## Installation Overview
+
+Steps covered in this guide:
+1. Clone repository
+2. Check system requirements
+3. Run interactive setup
+4. Verify installation
+5. Configure and customize
 5. [Configuration Options](#configuration-options)
 6. [First Run Setup](#first-run-setup)
 7. [Post-Installation](#post-installation)

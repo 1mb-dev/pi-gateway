@@ -1,3 +1,9 @@
+---
+title: Daily Operations
+nav_order: 1
+parent: Operations
+---
+
 # Pi Gateway Usage Guide
 
 Daily operations and management guide for your Pi Gateway homelab system.

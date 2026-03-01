@@ -1,3 +1,9 @@
+---
+title: Release Notes
+nav_order: 3
+parent: Reference
+---
+
 # Pi Gateway Release Notes
 
 ## Version 1.2.0 - Enhanced Testing & Quality 🧪
