@@ -608,4 +608,4 @@ make backup-config                  # Create configuration backup
 
 ---
 
-**Next**: [Troubleshooting](troubleshooting.md) | **Previous**: [Setup Guide](setup-guide.md)
+**Next**: [Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/) | **Previous**: [Setup Guide]({{ site.baseurl }}/getting-started/setup/)

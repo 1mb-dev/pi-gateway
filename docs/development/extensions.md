@@ -720,4 +720,4 @@ Popular community extensions:
 3. Test thoroughly using the [testing framework](#testing-extensions)
 4. Submit for community review
 
-**Previous**: [Troubleshooting](troubleshooting.md) | **Back**: [README](../README.md)
+**Previous**: [Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/) | **Back**: [Home]({{ site.baseurl }}/)

@@ -388,15 +388,11 @@ After successful installation:
 2. **Configure Devices**: Set up VPN clients on your devices
 3. **Monitor System**: Use `make status` regularly
 4. **Backup Configuration**: Use `make backup-config`
-5. **Read Usage Guide**: See [usage.md](usage.md) for daily operations
+5. **Read Usage Guide**: See [Daily Operations]({{ site.baseurl }}/operations/daily-operations/) for daily operations
 
 ## Getting Help
 
 - **Status Check**: `./scripts/service-status.sh`
 - **Logs**: `make logs`
-- **Troubleshooting**: See [troubleshooting.md](troubleshooting.md)
+- **Troubleshooting**: See [Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/)
 - **Issues**: [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues)
-
----
-
-**Next**: [Usage Guide](usage.md) | **Back**: [README](../README.md)

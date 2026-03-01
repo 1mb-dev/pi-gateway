@@ -745,4 +745,4 @@ If you can't resolve an issue:
 3. **Search Issues**: Check [GitHub Issues](https://github.com/1mb-dev/pi-gateway/issues)
 4. **Create Issue**: Provide system info, logs, and steps to reproduce
 
-**Previous**: [Usage Guide](usage.md) | **Back**: [README](../README.md)
+**Previous**: [Daily Operations]({{ site.baseurl }}/operations/daily-operations/) | **Back**: [Home]({{ site.baseurl }}/)

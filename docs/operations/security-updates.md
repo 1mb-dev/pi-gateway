@@ -128,7 +128,7 @@ sudo apt list --upgradable
 2. Change all SSH keys and VPN credentials
 3. Review auth logs: `sudo grep -i 'accepted\|failed' /var/log/auth.log`
 4. Rebuild system from clean Pi Gateway installation
-5. Report incident (see [SECURITY.md](../SECURITY.md))
+5. Report incident (see [SECURITY.md](https://github.com/1mb-dev/pi-gateway/blob/main/SECURITY.md))
 
 ## Additional Hardening (Optional)
 

@@ -295,16 +295,16 @@ make setup
 ### 📚 **Documentation**
 
 #### User Guides
-- [Quick Start Guide](docs/quick-start.md) - 15-minute setup
-- [Complete Setup Guide](docs/setup-guide.md) - Detailed installation
-- [Deployment Guide](docs/deployment-guide.md) - Production deployment
-- [Usage Guide](docs/usage.md) - Daily operations
-- [Troubleshooting Guide](docs/troubleshooting.md) - Problem solving
+- [Quick Start Guide]({{ site.baseurl }}/getting-started/quick-start/) - 15-minute setup
+- [Complete Setup Guide]({{ site.baseurl }}/getting-started/setup/) - Detailed installation
+- [Production Deployment]({{ site.baseurl }}/operations/production-deployment/) - Production deployment
+- [Daily Operations]({{ site.baseurl }}/operations/daily-operations/) - Daily operations
+- [Troubleshooting Guide]({{ site.baseurl }}/operations/troubleshooting/) - Problem solving
 
 #### Technical Documentation
-- [Technical Architecture Review](docs/technical-architecture-review.md) - System design
-- [Extension Development](docs/extensions.md) - Plugin creation
-- [Security Best Practices](docs/security.md) - Security hardening and compliance
+- [System Architecture]({{ site.baseurl }}/guides/architecture/) - System design
+- [Extension Development]({{ site.baseurl }}/development/extensions/) - Plugin creation
+- [Security Updates]({{ site.baseurl }}/operations/security-updates/) - Security hardening and compliance
 
 ### 🔄 **Migration & Compatibility**
 
@@ -353,7 +353,7 @@ make update
 
 ### 🤝 **Contributing**
 
-We welcome contributions! See our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions! See our [Contributing Guidelines](https://github.com/1mb-dev/pi-gateway/blob/main/CONTRIBUTING.md) for details.
 
 #### Development Setup
 ```bash
@@ -387,7 +387,7 @@ Special thanks to:
 
 ### 📄 **License**
 
-Pi Gateway is released under the MIT License. See [LICENSE](LICENSE) for details.
+Pi Gateway is released under the MIT License. See [LICENSE](https://github.com/1mb-dev/pi-gateway/blob/main/LICENSE) for details.
 
 ---
 
