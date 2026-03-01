@@ -1,3 +1,10 @@
+---
+title: Troubleshooting
+nav_order: 3
+parent: Operations
+layout: default
+---
+
 # Pi Gateway Troubleshooting Guide
 
 Comprehensive troubleshooting guide for common issues and solutions.

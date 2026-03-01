@@ -1,3 +1,10 @@
+---
+title: Technical Blog
+nav_order: 2
+parent: Reference
+layout: default
+---
+
 # Building a Secure Remote Access Gateway for Raspberry Pi: Architecture and Design Lessons
 
 ## Introduction
@@ -414,4 +421,4 @@ Pi Gateway is available at https://github.com/1mb-dev/pi-gateway under the MIT l
 
 ---
 
-*Vinay Kumar is a technical architect specializing in security infrastructure and distributed systems. This article is based on the development of Pi Gateway v1.2.0, which has passed comprehensive end-to-end testing and is approved for production deployment.*
+*This article is based on the development of Pi Gateway v1.2.0, which has passed comprehensive end-to-end testing and is approved for production deployment.*

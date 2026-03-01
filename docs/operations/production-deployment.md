@@ -1,3 +1,10 @@
+---
+layout: default
+title: Production Deployment
+nav_order: 3
+parent: Operations
+---
+
 # Pi Gateway Deployment Guide
 
 A comprehensive guide for deploying Pi Gateway in production environments.

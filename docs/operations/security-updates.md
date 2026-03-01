@@ -1,3 +1,10 @@
+---
+layout: default
+title: Security Updates
+nav_order: 4
+parent: Operations
+---
+
 # Security Best Practices
 
 ## Quick Security Checklist

@@ -1,0 +1,77 @@
+name: Deploy Documentation Site
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '_config.yml'
+      - 'Gemfile*'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - '_config.yml'
+      - 'Gemfile*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Build Jekyll site
+        run: bundle exec jekyll build --config _config.yml --source docs --destination site --strict_front_matter
+        env:
+          JEKYLL_ENV: production
+
+      - name: Validate build
+        run: |
+          for page in site/index.html site/getting-started/index.html site/guides/index.html; do
+            if [ ! -f "$page" ]; then
+              echo "Missing required page: $page"
+              exit 1
+            fi
+          done
+          echo "Documentation site built: $(find site -type f -name '*.html' | wc -l) HTML files"
+
+      - name: Setup Pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './site'
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

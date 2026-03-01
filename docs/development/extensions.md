@@ -1,3 +1,10 @@
+---
+title: Extensions
+nav_order: 1
+parent: Development
+layout: default
+---
+
 # Pi Gateway Extension System
 
 Guide for extending Pi Gateway with additional services and functionality.
