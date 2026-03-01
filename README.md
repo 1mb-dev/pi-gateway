@@ -3,13 +3,24 @@
 [![CI Status](https://github.com/1mb-dev/pi-gateway/workflows/Pi%20Gateway%20CI/badge.svg)](https://github.com/1mb-dev/pi-gateway/actions)
 [![Release](https://img.shields.io/github/v/release/1mb-dev/pi-gateway)](https://github.com/1mb-dev/pi-gateway/releases)
 [![License](https://img.shields.io/github/license/1mb-dev/pi-gateway)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-40%20tests%20|%20100%25%20pass-green)](https://github.com/1mb-dev/pi-gateway/actions)
 
 **Secure remote access gateway for Raspberry Pi. SSH + VPN setup in under 10 minutes.**
 
 ## Overview
 
 Pi Gateway transforms your Raspberry Pi into a secure remote access gateway with hardened SSH, WireGuard VPN, and firewall protection. Simple, focused, and production-ready.
+
+## When to Use This
+
+Pi Gateway is for you if:
+- You want SSH hardening, VPN, and firewall configured together as a single setup
+- You prefer an opinionated, tested configuration over assembling pieces yourself
+- You want dry-run mode to preview changes before they touch your system
+
+Consider alternatives if:
+- You only need a VPN — [PiVPN](https://pivpn.io/) is simpler for WireGuard-only setups
+- You want fine-grained control over every setting — manual setup gives you that
+- You're running on non-Raspberry Pi hardware — this project targets Pi OS specifically
 
 ## Quick Start
 
@@ -50,7 +61,6 @@ curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quic
 - Custom port configuration
 
 **Quality:**
-- 40 unit tests with 100% pass rate
 - Dry-run mode for safe testing
 - Docker and QEMU-based integration testing
 
@@ -67,13 +77,6 @@ curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quic
 - Dynamic DNS provider account (DuckDNS, No-IP, etc.)
 - SSH client for initial access
 
-## Core Components
-
-- System hardening and security best practices
-- SSH with key-based authentication
-- WireGuard VPN for encrypted remote access
-- Firewall protection (UFW + fail2ban)
-
 ## Extensions
 
 Advanced features moved to `extensions/` directory:
@@ -88,20 +91,22 @@ See `extensions/README.md` for installation instructions.
 
 ## Documentation
 
+Full documentation at [1mb-dev.github.io/pi-gateway](https://1mb-dev.github.io/pi-gateway/).
+
 ### Getting Started
-- [Quick Start Guide](docs/quick-start.md) - 15-minute setup guide
-- [Complete Setup Guide](docs/setup-guide.md) - Detailed installation instructions
-- [Deployment Guide](docs/deployment-guide.md) - Production deployment guide
+- [Quick Start Guide](docs/getting-started/quick-start.md) - 15-minute setup guide
+- [Setup Guide](docs/getting-started/setup.md) - Detailed installation instructions
+- [Deployment Guide](docs/operations/production-deployment.md) - Production deployment
 
 ### Daily Operations
-- [Usage Guide](docs/usage.md) - How to use installed services
-- [Troubleshooting Guide](docs/troubleshooting.md) - Common issues and solutions
+- [Daily Operations](docs/operations/daily-operations.md) - How to use installed services
+- [Troubleshooting](docs/operations/troubleshooting.md) - Common issues and solutions
 
 ### Advanced Topics
-- [Extension Development](docs/extensions.md) - Creating custom extensions
-- [Security Best Practices](docs/security.md) - Security hardening and compliance
-- [Technical Architecture](docs/TECHNICAL_BLOG.md) - In-depth technical blog post
-- [Release Notes](docs/RELEASE_NOTES.md) - Version history and features
+- [Extension Development](docs/development/extensions.md) - Creating custom extensions
+- [Security Updates](docs/operations/security-updates.md) - Security hardening and updates
+- [Technical Architecture](docs/reference/technical-blog.md) - Technical deep dive
+- [Release Notes](docs/reference/release-notes.md) - Version history
 
 ## Project Structure
 
@@ -115,70 +120,17 @@ pi-gateway/
 └── tests/                       # Validation scripts
 ```
 
-## 🧪 Development & Testing
+## Development & Testing
 
-### ✅ Production Validation Status
-**Pi Gateway v1.2.0 has passed comprehensive end-to-end testing and is APPROVED FOR PRODUCTION DEPLOYMENT.**
-
-- ✅ **40/40 Unit Tests Passing** (100% pass rate)
-- ✅ **Complete E2E Testing** (All major components validated)
-- ✅ **Security Hardening Verified** (Comprehensive security validation)
-- ✅ **Production Ready** (Docker-based Pi simulation testing)
-
-### Testing Environment
 ```bash
-# Quick dry-run tests (safe, no system changes)
-make test-dry-run
-
-# Complete unit test suite (40 tests)
-make test-unit
-
-# End-to-end testing with Pi simulation
-./tests/docker/test-pi-setup.sh
-
-# Comprehensive validation suite
-./tests/docker/comprehensive-test.sh
-
-# Docker integration testing
-make test-docker              # Simple mode
-make test-docker-systemd      # Systemd mode
-```
-
-### E2E Testing Framework
-```bash
-# Quick Pi Gateway validation
-./tests/docker/quick-e2e-test.sh
-
-# Full Docker-based Pi simulation
-./tests/docker/e2e-test.sh --keep-container
-
-# Simple setup testing
-./tests/docker/test-pi-setup.sh
-```
-
-### Development Setup
-```bash
-# Set up development environment
-make dev-setup
-
-# Code quality checks
-make lint
-make format-check
-
-# QEMU testing (hardware emulation)
-make setup-qemu
-make test-integration
-```
-
-### Available Testing Commands
-```bash
-make test-dry-run           # Safe dry-run testing
+make test-dry-run           # Safe dry-run testing (no system changes)
 make test-unit              # BATS unit tests
 make test-docker            # Docker integration tests
 make test-all-integration   # Complete test suite
-make docker-shell          # Interactive Docker container
-make docker-cleanup         # Clean Docker environment
+make lint                   # Code quality checks
 ```
+
+For end-to-end testing with Pi simulation, see `tests/docker/`.
 
 ## Contributing
 
