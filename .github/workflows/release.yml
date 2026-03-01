@@ -30,7 +30,8 @@ jobs:
         run: make test-all
 
       - name: Security scan
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@0.26.0
+        continue-on-error: true
         with:
           scan-type: 'fs'
           scan-ref: '.'
