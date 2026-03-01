@@ -652,13 +652,13 @@ Include:
 4. What you've tried so far
 
 Before opening an issue:
-1. Check the [Troubleshooting Guide](https://github.com/1mb-dev/pi-gateway/docs/operations/troubleshooting.md) in docs
+1. Check the [Troubleshooting Guide](../operations/troubleshooting/) in docs
 2. Search existing issues
 3. Try the solutions in this guide
 
 ## Next Steps
 
-- [Quick Install](example-quick-install) — Start from the beginning
-- [Configure SSH](example-configure-ssh) — SSH-specific help
-- [Dynamic DNS Setup](example-setup-dynamic-dns) — Domain-specific help
-- [Daily Operations](../operations/daily-operations.md) — Ongoing management
+- [Quick Install](example-quick-install/) — Start from the beginning
+- [Configure SSH](example-configure-ssh/) — SSH-specific help
+- [Dynamic DNS Setup](example-setup-dynamic-dns/) — Domain-specific help
+- [Daily Operations](../operations/daily-operations/) — Ongoing management

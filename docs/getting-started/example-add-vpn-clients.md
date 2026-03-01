@@ -153,6 +153,6 @@ sudo ufw status
 
 ## Next Steps
 
-- [Configure SSH Access](example-configure-ssh)
-- [Set Up Dynamic DNS](example-setup-dynamic-dns)
-- [Daily Operations Guide](../operations/daily-operations)
+- [Configure SSH Access](example-configure-ssh/)
+- [Set Up Dynamic DNS](example-setup-dynamic-dns/)
+- [Daily Operations Guide](../operations/daily-operations/)

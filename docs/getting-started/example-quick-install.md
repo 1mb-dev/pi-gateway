@@ -64,9 +64,9 @@ cat ~/.wireguard/wg0.conf
 ## Next Steps
 
 1. **Back up SSH key** — Save it to a secure location on your local machine
-2. **Configure Dynamic DNS** — See [Set Up Dynamic DNS](example-setup-dynamic-dns)
-3. **Add VPN Clients** — See [Add VPN Clients](example-add-vpn-clients)
-4. **Test SSH Access** — See [Configure SSH Access](example-configure-ssh)
+2. **Configure Dynamic DNS** — See [Set Up Dynamic DNS](example-setup-dynamic-dns/)
+3. **Add VPN Clients** — See [Add VPN Clients](example-add-vpn-clients/)
+4. **Test SSH Access** — See [Configure SSH Access](example-configure-ssh/)
 
 ## Troubleshooting
 
@@ -84,10 +84,10 @@ sudo journalctl -u wg-quick@wg0 -n 20
 ```
 
 **Can't SSH in?**
-See [Configure SSH Access](example-configure-ssh)
+See [Configure SSH Access](example-configure-ssh/)
 
 ## Related
 
 - Full guide: [Getting Started](../)
-- Detailed setup: [Manual Setup Guide](setup)
-- Architecture: [How It Works](../guides/architecture)
+- Detailed setup: [Manual Setup Guide](setup/)
+- Architecture: [How It Works](../guides/architecture/)
