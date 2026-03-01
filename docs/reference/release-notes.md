@@ -7,6 +7,41 @@ layout: default
 
 # Pi Gateway Release Notes
 
+## Version 1.4.0 - Documentation Site
+
+**Release Date:** 2026-03-01
+**Compatibility:** Raspberry Pi 4/5, ARM64/x86_64
+
+### What's New
+
+- **Documentation site** — Professional documentation hosted on GitHub Pages at [1mb-dev.github.io/pi-gateway](https://1mb-dev.github.io/pi-gateway/) using Jekyll with the Just the Docs theme
+- **Hierarchical docs structure** — Reorganized documentation into Getting Started, Guides, Operations, Development, and Reference sections
+- **5 example guides** — Problem-oriented guides for quick install, SSH setup, VPN clients, dynamic DNS, and troubleshooting
+- **Knowledge transfer document** — Comprehensive 12-section technical guide for team onboarding
+- **CI/CD for docs** — Automated build and deploy workflow with strict front matter validation on PRs
+
+### Fixes
+
+- Pin trivy-action to v0.26.0 (was using unstable @master ref)
+- Fix SC2116 linting warnings in pi-gateway-cli.sh
+
+### Dependencies
+
+- Bump actions/upload-artifact to v6
+- Bump actions/download-artifact to v7
+- Bump tests/bats-core submodule
+
+### Upgrade
+
+```bash
+cd pi-gateway
+git pull
+```
+
+No configuration changes required. Documentation is deployed automatically.
+
+---
+
 ## Version 1.2.0 - Enhanced Testing & Quality 🧪
 
 **Release Date:** 2025-09-21

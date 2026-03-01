@@ -96,6 +96,6 @@ curl -sSL https://raw.githubusercontent.com/1mb-dev/pi-gateway/main/scripts/quic
 
 ---
 
-**Latest Version:** v1.2.0
+**Latest Version:** v1.4.0
 **License:** MIT
 **GitHub:** [1mb-dev/pi-gateway](https://github.com/1mb-dev/pi-gateway)
