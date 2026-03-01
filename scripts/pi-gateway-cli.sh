@@ -469,7 +469,7 @@ cmd_update() {
     apt list --upgradable 2>/dev/null | head -20
     echo
 
-    read -r -p "$(echo "Proceed with system upgrade? [y/N]: ")" confirm
+    read -r -p "Proceed with system upgrade? [y/N]: " confirm
     if [[ $confirm =~ ^[Yy] ]]; then
         echo "Upgrading system..."
         sudo apt upgrade -y
@@ -521,20 +521,20 @@ show_menu() {
     echo -e "  0. Exit"
     echo
 
-    read -r -p "$(echo "Select option [0-7]: ")" choice
+    read -r -p "Select option [0-7]: " choice
 
     case $choice in
         1) cmd_status ;;
         2)
             echo
             echo "VPN Commands: add <name>, remove <name>, list, status"
-            read -r -p "$(echo "Enter VPN command: ")" vpn_cmd
+            read -r -p "Enter VPN command: " vpn_cmd
             cmd_vpn "$vpn_cmd"
             ;;
         3)
             echo
             echo "Log types: ssh, vpn, firewall, fail2ban, system, errors"
-            read -r -p "$(echo "Enter log type (or press Enter for overview): ")" log_type
+            read -r -p "Enter log type (or press Enter for overview): " log_type
             cmd_logs "$log_type"
             ;;
         4) cmd_security status ;;
@@ -546,7 +546,7 @@ show_menu() {
     esac
 
     echo
-    read -r -p "$(echo -e "${CYAN}Press Enter to continue...")"
+    read -r -p "${CYAN}Press Enter to continue..."
     show_menu
 }
 
