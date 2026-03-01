@@ -11,10 +11,10 @@ Daily management, monitoring, and troubleshooting of Pi Gateway.
 
 ## Guides
 
-- **[Daily Operations](daily-operations/)** — VPN client management, monitoring, backups
-- **[Troubleshooting](troubleshooting/)** — Problem diagnosis and recovery
-- **[Production Deployment](production-deployment/)** — Deploying Pi Gateway in production
-- **[Security Updates](security-updates/)** — Keeping your system secure
+- **[Daily Operations]({{ site.baseurl }}/operations/daily-operations/)** — VPN client management, monitoring, backups
+- **[Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/)** — Problem diagnosis and recovery
+- **[Production Deployment]({{ site.baseurl }}/operations/production-deployment/)** — Deploying Pi Gateway in production
+- **[Security Updates]({{ site.baseurl }}/operations/security-updates/)** — Keeping your system secure
 
 ## Common Operations
 
@@ -44,11 +44,11 @@ Daily management, monitoring, and troubleshooting of Pi Gateway.
 
 ## Quick Links
 
-- **System is down?** → [Recovery Procedures](troubleshooting/#recovery-procedures)
-- **Can't SSH in?** → [SSH Troubleshooting](troubleshooting/#ssh-issues)
-- **VPN not working?** → [VPN Troubleshooting](troubleshooting/#vpn-issues)
+- **System is down?** → [Recovery Procedures]({{ site.baseurl }}/operations/troubleshooting/#recovery-procedures)
+- **Can't SSH in?** → [SSH Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/#ssh-issues)
+- **VPN not working?** → [VPN Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/#vpn-issues)
 
 ## Related
 
-- **How the system works** → [Architecture](../guides/architecture/)
-- **Technical details** → [Knowledge Transfer](../reference/knowledge-transfer/)
+- **How the system works** → [Architecture]({{ site.baseurl }}/guides/architecture/)
+- **Technical details** → [Knowledge Transfer]({{ site.baseurl }}/reference/knowledge-transfer/)

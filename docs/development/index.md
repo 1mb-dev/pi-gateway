@@ -11,7 +11,7 @@ Contributing to Pi Gateway, extending functionality, and working with the codeba
 
 ## Guides
 
-- **[Extensions](extensions/)** — Building custom extensions for Pi Gateway
+- **[Extensions]({{ site.baseurl }}/development/extensions/)** — Building custom extensions for Pi Gateway
 
 ## Development Setup
 
@@ -38,5 +38,5 @@ See the [GitHub repository](https://github.com/1mb-dev/pi-gateway) for contribut
 
 ## Related
 
-- **How the system works** → [Architecture](../guides/architecture/)
-- **Full technical context** → [Knowledge Transfer](../reference/knowledge-transfer/)
+- **How the system works** → [Architecture]({{ site.baseurl }}/guides/architecture/)
+- **Full technical context** → [Knowledge Transfer]({{ site.baseurl }}/reference/knowledge-transfer/)

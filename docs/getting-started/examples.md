@@ -11,19 +11,19 @@ Problem-oriented examples for common Pi Gateway scenarios.
 
 ## Quick Start
 
-1. **[Quick Install](example-quick-install/)** — Install Pi Gateway in one line
-2. **[Add VPN Clients](example-add-vpn-clients/)** — Configure VPN for macOS, Windows, Linux, iOS, Android
-3. **[Configure SSH Access](example-configure-ssh/)** — Set up SSH keys and remote access
-4. **[Set Up Dynamic DNS](example-setup-dynamic-dns/)** — Keep your hostname in sync (DuckDNS, No-IP)
-5. **[Troubleshooting Guide](example-troubleshooting/)** — Solve common issues
+1. **[Quick Install]({{ site.baseurl }}/getting-started/example-quick-install/)** — Install Pi Gateway in one line
+2. **[Add VPN Clients]({{ site.baseurl }}/getting-started/example-add-vpn-clients/)** — Configure VPN for macOS, Windows, Linux, iOS, Android
+3. **[Configure SSH Access]({{ site.baseurl }}/getting-started/example-configure-ssh/)** — Set up SSH keys and remote access
+4. **[Set Up Dynamic DNS]({{ site.baseurl }}/getting-started/example-setup-dynamic-dns/)** — Keep your hostname in sync (DuckDNS, No-IP)
+5. **[Troubleshooting Guide]({{ site.baseurl }}/getting-started/example-troubleshooting/)** — Solve common issues
 
 ## Use Case Scenarios
 
 **Scenario: "I want secure SSH access to my Pi from anywhere"**
-→ Follow: [Quick Start](example-quick-install/) + [Configure SSH Access](example-configure-ssh/)
+→ Follow: [Quick Start]({{ site.baseurl }}/getting-started/example-quick-install/) + [Configure SSH Access]({{ site.baseurl }}/getting-started/example-configure-ssh/)
 
 **Scenario: "I want to access my entire home network remotely via VPN"**
-→ Follow: [Quick Start](example-quick-install/) + [Add VPN Clients](example-add-vpn-clients/)
+→ Follow: [Quick Start]({{ site.baseurl }}/getting-started/example-quick-install/) + [Add VPN Clients]({{ site.baseurl }}/getting-started/example-add-vpn-clients/)
 
 **Scenario: "I want both SSH and VPN with a custom domain"**
 → Follow: All guides in order
@@ -53,6 +53,6 @@ cat ~/.wireguard/clients/my-client.conf
 ## Next Steps
 
 After completing these examples:
-1. Review [Daily Operations Guide](../operations/daily-operations/)
-2. Check [Troubleshooting Guide](../operations/troubleshooting/) if issues arise
-3. Read [Architecture Overview](../guides/architecture/) to understand how it works
+1. Review [Daily Operations Guide]({{ site.baseurl }}/operations/daily-operations/)
+2. Check [Troubleshooting Guide]({{ site.baseurl }}/operations/troubleshooting/) if issues arise
+3. Read [Architecture Overview]({{ site.baseurl }}/guides/architecture/) to understand how it works

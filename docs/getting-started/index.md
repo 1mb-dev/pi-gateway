@@ -11,9 +11,9 @@ Installation, setup, and first steps with Pi Gateway.
 
 Choose your installation method:
 
-- **[Quick Start](quick-start/)** — One-command installation (15 minutes)
-- **[Manual Setup](setup/)** — Detailed step-by-step guide
-- **[Example Guides](examples/)** — Problem-oriented setup guides
+- **[Quick Start]({{ site.baseurl }}/getting-started/quick-start/)** — One-command installation (15 minutes)
+- **[Manual Setup]({{ site.baseurl }}/getting-started/setup/)** — Detailed step-by-step guide
+- **[Example Guides]({{ site.baseurl }}/getting-started/examples/)** — Problem-oriented setup guides
 
 After installation, follow the example guides for your specific use case.
 
@@ -44,11 +44,11 @@ After completing setup, you'll have:
 1. Choose installation method above
 2. Follow the guide for your setup
 3. Verify all services are running
-4. Review [Operations Guide](../operations/) for daily management
-5. Check [Troubleshooting](../operations/troubleshooting/) if issues arise
+4. Review [Operations Guide]({{ site.baseurl }}/operations/) for daily management
+5. Check [Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/) if issues arise
 
 ## Need Help?
 
-- **Errors during install?** → [Troubleshooting](../operations/troubleshooting/)
-- **Why this component?** → [Architecture Guide](../guides/architecture/)
-- **Want to contribute?** → [Development Guide](../development/)
+- **Errors during install?** → [Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/)
+- **Why this component?** → [Architecture Guide]({{ site.baseurl }}/guides/architecture/)
+- **Want to contribute?** → [Development Guide]({{ site.baseurl }}/development/)

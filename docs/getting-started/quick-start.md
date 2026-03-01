@@ -44,13 +44,13 @@ Once setup completes, you'll have:
 
 ## Need Custom Setup?
 
-For more control over installation, see [Manual Setup Guide](setup/).
+For more control over installation, see [Manual Setup Guide]({{ site.baseurl }}/getting-started/setup/).
 
 ## Troubleshooting
 
-- **Installation fails?** → See [Troubleshooting Guide](../operations/troubleshooting/)
-- **Can't SSH in?** → Check [Troubleshooting - SSH](../operations/troubleshooting/#ssh-issues)
-- **VPN not working?** → See [Troubleshooting - VPN](../operations/troubleshooting/#vpn-issues)
+- **Installation fails?** → See [Troubleshooting Guide]({{ site.baseurl }}/operations/troubleshooting/)
+- **Can't SSH in?** → Check [Troubleshooting - SSH]({{ site.baseurl }}/operations/troubleshooting/#ssh-issues)
+- **VPN not working?** → See [Troubleshooting - VPN]({{ site.baseurl }}/operations/troubleshooting/#vpn-issues)
 
 ## System Requirements
 
@@ -61,4 +61,4 @@ Before starting, ensure you have:
 - Network connection (Ethernet recommended)
 - Administrator access to your router
 
-Learn more: [Full Setup Guide](setup/) →
+Learn more: [Full Setup Guide]({{ site.baseurl }}/getting-started/setup/) →

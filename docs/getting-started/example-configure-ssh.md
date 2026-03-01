@@ -367,7 +367,7 @@ exit
 
 ## Next Steps
 
-- [Add VPN Clients](example-add-vpn-clients/) — VPN access for other devices
-- [Set Up Dynamic DNS](example-setup-dynamic-dns/) — Keep your hostname in sync
-- [Troubleshooting Guide](example-troubleshooting/) — Solve common issues
-- [Daily Operations Guide](../operations/daily-operations/) — Managing your Pi Gateway
+- [Add VPN Clients]({{ site.baseurl }}/getting-started/example-add-vpn-clients/) — VPN access for other devices
+- [Set Up Dynamic DNS]({{ site.baseurl }}/getting-started/example-setup-dynamic-dns/) — Keep your hostname in sync
+- [Troubleshooting Guide]({{ site.baseurl }}/getting-started/example-troubleshooting/) — Solve common issues
+- [Daily Operations Guide]({{ site.baseurl }}/operations/daily-operations/) — Managing your Pi Gateway

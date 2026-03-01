@@ -11,7 +11,7 @@ Task-focused documentation for working with Pi Gateway components.
 
 ## Available Guides
 
-- **[Architecture Overview](architecture/)** — System design, components, and data flows
+- **[Architecture Overview]({{ site.baseurl }}/guides/architecture/)** — System design, components, and data flows
 
 ## Topics Covered
 
@@ -40,6 +40,6 @@ Task-focused documentation for working with Pi Gateway components.
 
 ## Related
 
-- **Hands-on setup** → [Getting Started](../getting-started/)
-- **Problem solving** → [Troubleshooting](../operations/troubleshooting/)
-- **Building extensions** → [Extensions](../development/extensions/)
+- **Hands-on setup** → [Getting Started]({{ site.baseurl }}/getting-started/)
+- **Problem solving** → [Troubleshooting]({{ site.baseurl }}/operations/troubleshooting/)
+- **Building extensions** → [Extensions]({{ site.baseurl }}/development/extensions/)

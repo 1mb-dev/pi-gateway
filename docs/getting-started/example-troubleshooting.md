@@ -652,13 +652,13 @@ Include:
 4. What you've tried so far
 
 Before opening an issue:
-1. Check the [Troubleshooting Guide](../operations/troubleshooting/) in docs
+1. Check the [Troubleshooting Guide]({{ site.baseurl }}/operations/troubleshooting/) in docs
 2. Search existing issues
 3. Try the solutions in this guide
 
 ## Next Steps
 
-- [Quick Install](example-quick-install/) — Start from the beginning
-- [Configure SSH](example-configure-ssh/) — SSH-specific help
-- [Dynamic DNS Setup](example-setup-dynamic-dns/) — Domain-specific help
-- [Daily Operations](../operations/daily-operations/) — Ongoing management
+- [Quick Install]({{ site.baseurl }}/getting-started/example-quick-install/) — Start from the beginning
+- [Configure SSH]({{ site.baseurl }}/getting-started/example-configure-ssh/) — SSH-specific help
+- [Dynamic DNS Setup]({{ site.baseurl }}/getting-started/example-setup-dynamic-dns/) — Domain-specific help
+- [Daily Operations]({{ site.baseurl }}/operations/daily-operations/) — Ongoing management

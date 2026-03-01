@@ -11,9 +11,9 @@ Technical references, release notes, and additional resources.
 
 ## Documentation
 
-- **[Knowledge Transfer](knowledge-transfer/)** — Comprehensive technical guide covering architecture, deployment, and operations
-- **[Technical Blog](technical-blog/)** — In-depth technical articles and design rationale
-- **[Release Notes](release-notes/)** — Version history and changelog
+- **[Knowledge Transfer]({{ site.baseurl }}/reference/knowledge-transfer/)** — Comprehensive technical guide covering architecture, deployment, and operations
+- **[Technical Blog]({{ site.baseurl }}/reference/technical-blog/)** — In-depth technical articles and design rationale
+- **[Release Notes]({{ site.baseurl }}/reference/release-notes/)** — Version history and changelog
 
 ## External Resources
 

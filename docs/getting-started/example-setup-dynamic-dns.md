@@ -387,7 +387,7 @@ A: You can configure SSH to run on port 443 (HTTPS) if needed, but this is less 
 
 ## Next Steps
 
-- [Configure SSH Access](example-configure-ssh/) — Now that you have a domain
-- [Add VPN Clients](example-add-vpn-clients/) — VPN access through your domain
-- [Troubleshooting Guide](example-troubleshooting/) — Fix common issues
-- [Daily Operations Guide](../operations/daily-operations/) — Monitor your setup
+- [Configure SSH Access]({{ site.baseurl }}/getting-started/example-configure-ssh/) — Now that you have a domain
+- [Add VPN Clients]({{ site.baseurl }}/getting-started/example-add-vpn-clients/) — VPN access through your domain
+- [Troubleshooting Guide]({{ site.baseurl }}/getting-started/example-troubleshooting/) — Fix common issues
+- [Daily Operations Guide]({{ site.baseurl }}/operations/daily-operations/) — Monitor your setup
