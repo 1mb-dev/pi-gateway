@@ -99,63 +99,11 @@ jobs:
           name: release-assets
           path: release/
 
-      - name: Generate release notes
-        id: release-notes
-        run: |
-          cat > release-notes.md << 'EOF'
-          ## Pi Gateway Release ${{ needs.build-release-assets.outputs.release-tag }}
-
-          ### 🚀 Features
-          - Complete Raspberry Pi homelab bootstrap system
-          - Automated SSH hardening and VPN configuration
-          - WireGuard VPN server setup with client management
-          - System security hardening and monitoring setup
-          - Remote access configuration (SSH, VNC, DDNS)
-
-          ### 🧪 Testing Infrastructure
-          - Comprehensive dry-run mode for safe development
-          - 40 unit tests with 100% pass rate
-          - QEMU Raspberry Pi emulation for hardware testing
-          - Docker integration testing (simple + systemd modes)
-          - Multi-platform compatibility
-
-          ### 📋 Installation
-          1. Download `pi-gateway-${{ needs.build-release-assets.outputs.release-tag }}.tar.gz`
-          2. Extract: `tar -xzf pi-gateway-${{ needs.build-release-assets.outputs.release-tag }}.tar.gz`
-          3. Run: `make check` to validate requirements
-          4. Install: `make setup` on target Raspberry Pi
-
-          ### ✅ System Requirements
-          - Raspberry Pi 4 (recommended) or compatible ARM64 device
-          - Raspberry Pi OS (Debian-based)
-          - 8GB+ storage, 2GB+ RAM
-          - Internet connectivity for package installation
-
-          **Full Documentation**: See included README and docs/ directory
-          EOF
-
       - name: Create GitHub Release
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ needs.build-release-assets.outputs.release-tag }}
-          name: Pi Gateway ${{ needs.build-release-assets.outputs.release-tag }}
-          bodyFile: release-notes.md
+          generateReleaseNotes: true
           artifacts: "release/*"
-          draft: false
           prerelease: ${{ contains(needs.build-release-assets.outputs.release-tag, '-') }}
           token: ${{ secrets.GITHUB_TOKEN }}
-
-  post-release:
-    name: Post-Release Tasks
-    runs-on: ubuntu-latest
-    needs: [create-github-release]
-    if: success()
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Update README badges
-        run: |
-          echo "🎉 Release ${{ needs.build-release-assets.outputs.release-tag }} created successfully!"
-          echo "📦 Assets uploaded and available for download"
-          echo "🚀 Pi Gateway is ready for production deployment"
